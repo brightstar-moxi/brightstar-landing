@@ -22,7 +22,7 @@ export default function Hero() {
           EMPOWERING YOUTH THROUGH DIGITAL SKILLS & KNOWLEDGE
         </h2>
         <p className="text-base sm:text-lg mb-6 text-gray-200">
-          Explore our affordable Ebooks and start your journey toda
+          Explore our affordable Ebooks and start your journey today
         </p>
         <a
           href="#ebooks"
