@@ -30,11 +30,11 @@ export default function Footer() {
       </div>
 
       <div className="flex justify-center gap-4 mb-6">
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <a href="https://www.facebook.com/profile.php?id=100075277795478" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
         
           <Facebook className="w-5 h-5 hover:text-teal-400 transition-colors" />
         </a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+        <a href="https://x.com/BrightstarMoxiz" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
           <Twitter className="w-5 h-5 hover:text-teal-400 transition-colors" />
         </a>
         <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
