@@ -1,19 +1,19 @@
 export const ebooks = [
   {
     id: 1,
-    title: "Coding Adventures",
+    title: "Game & Earn",
     price: 15.99,
-    image: "https://via.placeholder.com/300x200?text=Coding+Adventures",
+    image: "/nice.jpg",
   },
   {
     id: 2,
-    title: "Digital Marketing Mastery",
+    title: "Book Before Bill",
     price: 24.99,
     image: "https://via.placeholder.com/300x200?text=Digital+Marketing+Mastery",
   },
   {
     id: 3,
-    title: "AI for Beginners",
+    title: "Git Cheat Sheet",
     price: 29.99,
     image: "https://via.placeholder.com/300x200?text=AI+for+Beginners",
   },
