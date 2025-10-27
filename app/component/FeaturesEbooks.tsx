@@ -1,3 +1,6 @@
+"use client";
+
+import Link from "next/link";
 import { ebooks } from "../data/ebook";
 
 export default function FeaturedEbooks() {
@@ -20,10 +23,17 @@ export default function FeaturedEbooks() {
             />
             <div className="p-4 flex flex-col items-center">
               <h4 className="font-semibold text-gray-800 mb-2">{book.title}</h4>
-              <p className="text-gray-600 mb-3">${book.price.toFixed(2)}</p>
-              <button className="bg-teal-500 text-white font-medium px-4 py-2 rounded-full hover:bg-teal-400 transition">
-                Buy Now
-              </button>
+              <p className="text-gray-600 mb-3">₦{book.price.toFixed(2)}</p>
+              
+              <Link
+                href="https://selar.com/m/moses-jojolola1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="bg-teal-500 text-white font-medium px-4 py-2 rounded-full hover:bg-teal-400 transition">
+                  Buy Now
+                </button>
+              </Link>
             </div>
           </div>
         ))}
