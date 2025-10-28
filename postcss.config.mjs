@@ -1,6 +1,6 @@
 const config = {
   plugins: {
-    "tailwind-scrollbar-hide":{},
+    // "tailwind-scrollbar-hide":{},
     "@tailwindcss/postcss": {},
     
 

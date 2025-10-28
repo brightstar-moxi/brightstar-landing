@@ -12,10 +12,10 @@
 //   subsets: ["latin"],
 // });
 
+import "./globals.css"; // ✅ Must come first
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
-
 
 export const metadata = {
   title: "Brightstar Tech",
