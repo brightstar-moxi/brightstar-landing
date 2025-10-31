@@ -17,4 +17,10 @@ export const ebooks = [
     price: 1000,
     image: "git.jpg",
   },
+  {
+    id: 4,
+    title: "Real Hustle",
+    price: 10000,
+    image: "cover-hustler.png",
+  },
 ];
