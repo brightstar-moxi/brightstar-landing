@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import emailjs from "emailjs-com";
+import SubscribeForm from "./SubscribeForm";
 
 export default function Contact() {
   const form = useRef<HTMLFormElement | null>(null);
@@ -64,7 +65,7 @@ export default function Contact() {
         <textarea
           name="message"
           rows={5}
-          placeholder="Your Message"
+          placeholder="Your Messages"
           required
           className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
         ></textarea>
@@ -77,6 +78,7 @@ export default function Contact() {
 
         {status && <p className="text-sm text-center text-gray-700">{status}</p>}
       </form>
+      <SubscribeForm/>
     </section>
   );
 }
