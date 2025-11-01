@@ -14,7 +14,7 @@ export default function SubscribeForm() {
     if (result.status === "already_subscribed") {
       alert("You're already subscribed!");
     } else {
-      alert("Subscribed successfully!");
+      alert("Subscribed successfully! THANK YOU");
     }
 
     setEmail("");
