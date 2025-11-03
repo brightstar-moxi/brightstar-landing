@@ -407,12 +407,12 @@ export default function SubscribeForm() {
             template_params: {
               to_email: email,
               subject: "Welcome to Brightstar Tech 🌟",
-              message: `
-                <h2>Hi there 👋</h2>
-                <p>Thank you for subscribing to <strong>Brightstar Tech</strong>!</p>
-                <p>We're thrilled to have you onboard — you'll now receive updates, news, and exclusive releases.</p>
-                <p>Stay bright! ✨<br>— The Brightstar Team</p>
-              `,
+              // message: `
+              //   <h2>Hi there 👋</h2>
+              //   <p>Thank you for subscribing to <strong>Brightstar Tech</strong>!</p>
+              //   <p>We're thrilled to have you onboard — you'll now receive updates, news, and exclusive releases.</p>
+              //   <p>Stay bright! ✨<br>— The Brightstar Team</p>
+              // `,
             },
           }),
         });
