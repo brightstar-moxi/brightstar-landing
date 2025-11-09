@@ -26,7 +26,7 @@ export const ebooks = [
   {
     id: 5,
     title: "Life after School",
-    price: 10000,
+    price: 5000,
     image: "life-school.png",
   },
 ];
