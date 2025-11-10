@@ -9,7 +9,8 @@
  */
 
 import type * as addSubscriber from "../addSubscriber.js";
-import type * as sendWelcomeEmail from "../sendWelcomeEmail.js";
+import type * as getSubscribers from "../getSubscribers.js";
+import type * as sendUpdateEmail from "../sendUpdateEmail.js";
 
 import type {
   ApiFromModules,
@@ -27,7 +28,8 @@ import type {
  */
 declare const fullApi: ApiFromModules<{
   addSubscriber: typeof addSubscriber;
-  sendWelcomeEmail: typeof sendWelcomeEmail;
+  getSubscribers: typeof getSubscribers;
+  sendUpdateEmail: typeof sendUpdateEmail;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
 
