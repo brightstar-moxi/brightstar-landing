@@ -3,6 +3,7 @@ import FeaturedEbooks from "./component/FeaturesEbooks";
 import Footer from "./component/Footer";
 import Header from "./component/Header";
 import Hero from "./component/Hero";
+import PlansSection from "./component/PlansSection";
 import Testimonials from "./component/Testimonials";
 // import Footer from "./component/Footer";
 
@@ -12,6 +13,7 @@ export default function Home() {
       <Header />
       <Hero />
       <FeaturedEbooks />
+      <PlansSection/>
       <Testimonials/>
       <Contact/>
       
