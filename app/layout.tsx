@@ -35,27 +35,53 @@
 // }
 
 
-"use client";
+// "use client";
 
+// import "./globals.css";
+// import { Inter } from "next/font/google";
+// import { ConvexProvider, ConvexReactClient } from "convex/react";
+// import { ReactNode } from "react";
+// import { Analytics } from "@vercel/analytics/next"
+
+// // ✅ Create your Convex client
+// // Replace with your actual deployment URL from the Convex dashboard
+// // const convex = new ConvexReactClient("https://brightstar-landing.convex.cloud");
+// const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+// const inter = Inter({ subsets: ["latin"] });
+
+// export default function RootLayout({ children }: { children: ReactNode }) {
+//   return (
+//     <html lang="en">
+//       <body className={inter.className}>
+//         {/* ✅ Wrap your entire app with ConvexProvider */}
+//         <ConvexProvider client={convex}>
+//           {children}
+//            <Analytics />
+//         </ConvexProvider>
+//       </body>
+//     </html>
+//   );
+// }
+
+
+
+// app/layout.tsx
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
+import ConvexClientProvider from "./ConvexClientProvider"; // We'll create this
 
-// ✅ Create your Convex client
-// Replace with your actual deployment URL from the Convex dashboard
-// const convex = new ConvexReactClient("https://brightstar-landing.convex.cloud");
-const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* ✅ Wrap your entire app with ConvexProvider */}
-        <ConvexProvider client={convex}>
+        <ConvexClientProvider>
           {children}
-        </ConvexProvider>
+          <Analytics />
+        </ConvexClientProvider>
       </body>
     </html>
   );
