@@ -151,7 +151,7 @@ export default function AdminPage() {
         whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255,0,0,0.4)" }}
         whileTap={{ scale: 0.95 }}
         onClick={handleLogout}
-        className="relative z-10 mt-8 px-8 py-3 rounded-xl font-bold text-white bg-red-500 hover:bg-red-600 transition-all shadow-lg"
+        className="relative z-10 mt-8 px-8 py-3 rounded-xl font-bold text-white bg-red-600 hover:bg-red-700 transition-all shadow-lg"
       >
         Logout
       </motion.button>
