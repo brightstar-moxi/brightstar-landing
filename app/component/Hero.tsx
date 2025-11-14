@@ -19,10 +19,12 @@ export default function Hero() {
       {/* ✅ Hero content */}
       <div className="py-16 sm:py-20 px-6 max-w-3xl mx-auto">
         <h2 className="text-2xl sm:text-4xl font-bold mb-3 leading-snug">
-          EMPOWERING YOUTH THROUGH DIGITAL SKILLS & KNOWLEDGE
+          WE CREATE. WE TEACH. WE SOLVE.
+
+
         </h2>
         <p className="text-base sm:text-lg mb-6 text-gray-200">
-          Explore our affordable Ebooks and start your journey today
+          From professional services to premium eBooks and interactive tools, we help you build the future.
         </p>
         <a
           href="#ebooks"

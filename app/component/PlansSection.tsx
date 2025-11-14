@@ -6,13 +6,25 @@ import Link from "next/link";
 const plans = [
   {
     name: "Basic",
-    price: "$49",
+    price: "$45",
     gradient: "from-teal-400 to-cyan-500",
     description: "Perfect for small one-time projects and quick fixes.",
     features: [
-      "1-page design or task",
-      "Email support",
-      "Delivery in 3 days",
+      "1-page landing website",
+
+"Mobile responsive",
+
+"Basic UI design",
+
+"Contact form",
+
+"WhatsApp integration",
+
+"Basic SEO setup",
+
+"2 revisions",
+
+"Delivery: 3 days"
     ],
   },
   {
@@ -21,9 +33,23 @@ const plans = [
     gradient: "from-blue-400 to-indigo-500",
     description: "Ideal for startups and growing projects.",
     features: [
-      "Up to 3 pages or modules",
-      "Priority email support",
-      "Delivery in 5 days",
+       " Up to 5 pages",
+
+"Professional UI design",
+
+"Mobile responsive",
+
+"Contact/booking forms",
+
+"Basic animations (smooth scroll, fade-in)",
+
+"SEO Optimization (standard)",
+
+"Google Analytics setup",
+
+"4 revisions",
+
+"Delivery: 5–7 days"
     ],
   },
   {
@@ -32,9 +58,27 @@ const plans = [
     gradient: "from-purple-500 to-pink-500",
     description: "For businesses needing top-quality work and speed.",
     features: [
-      "Up to 7 pages / full project",
-      "24/7 support",
-      "Delivery in 7 days",
+      "Up to 10 custom-designed pages",
+
+"Fully responsive + premium animations",
+
+"Full backend ",
+
+"Admin dashboard",
+
+"Database ",
+
+"Authentication ",
+
+"Payment integration ",
+
+"SEO advanced optimization",
+
+"Performance optimization",
+
+"6 revisions",
+
+"Delivery: 10–14 days"
     ],
   },
   {
@@ -43,9 +87,23 @@ const plans = [
     gradient: "from-amber-400 to-orange-500",
     description: "Full premium service + maintenance and consulting.",
     features: [
-      "Unlimited revisions",
-      "Monthly maintenance",
-      "Dedicated support",
+      "Everything in Premium, plus:",
+
+"Custom UX/UI design (professional mockups)",
+
+"Complex backend features (APIs, dashboards, admin tools)",
+
+"Fully automated workflows",
+
+"Email automation setup",
+
+"Chat system or real-time features",
+
+"Cloud deployment ",
+
+"12 revisions",
+
+"Delivery: 3–4 weeks"
     ],
   },
 ];
