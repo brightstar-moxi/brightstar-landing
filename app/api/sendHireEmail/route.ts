@@ -7,7 +7,9 @@ export async function POST(req: Request) {
     const emailBody = {
       service_id: process.env.EMAILJS_SERVICE_ID,
       template_id: process.env.EMAILJS_TEMPLATE_ID,
+      // use private key for server-side
       user_id: process.env.EMAILJS_PUBLIC_KEY,
+       accessToken: process.env.EMAILJS_PRIVATE_KEY,
       template_params: {
         to_email: "brightstartech11@gmail.com",
         from_name: data.name,
