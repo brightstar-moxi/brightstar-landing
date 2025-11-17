@@ -122,36 +122,53 @@ export default function PlansSection() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl">
         {plans.map((plan, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2 }}
-            whileHover={{ scale: 1.05 }}
-            className={`relative p-8 rounded-2xl bg-gray-900 border border-gray-800 shadow-xl hover:shadow-[0_0_25px_rgba(0,255,255,0.3)] transition-all`}
-          >
-            <div
-              className={`absolute inset-0 rounded-2xl opacity-10 bg-gradient-to-r ${plan.gradient}`}
-            />
-            <h2 className="text-2xl font-bold mb-2 relative z-10">{plan.name}</h2>
-            <p className="text-4xl font-extrabold mb-4 relative z-10">{plan.price}</p>
-            <p className="text-gray-300 mb-6 relative z-10">{plan.description}</p>
+         <motion.div
+  key={index}
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: index * 0.2 }}
+  whileHover={{ scale: 1.05 }}
+  className={`relative p-8 rounded-2xl bg-gray-900 border border-gray-800 shadow-xl hover:shadow-[0_0_25px_rgba(0,255,255,0.3)] transition-all h-[600px] flex flex-col`}
+>
+  {/* Gradient overlay */}
+  <div
+    className={`absolute inset-0 rounded-2xl opacity-10 bg-gradient-to-r ${plan.gradient}`}
+  />
 
-            <ul className="space-y-2 mb-6 relative z-10">
-              {plan.features.map((feature, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
-                  ✅ {feature}
-                </li>
-              ))}
-            </ul>
+  {/* Title, price, description */}
+  <h2 className="text-2xl font-bold mb-2 relative z-10">{plan.name}</h2>
+  <p className="text-4xl font-extrabold mb-4 relative z-10">{plan.price}</p>
+  <p className="text-gray-300 mb-4 relative z-10">{plan.description}</p>
 
-            <Link
-              href={`/hire/${plan.name.toLowerCase()}`}
-              className={`relative z-10 w-full block text-center font-semibold py-3 rounded-xl bg-gradient-to-r ${plan.gradient} hover:opacity-90 transition`}
-            >
-              Choose {plan.name}
-            </Link>
-          </motion.div>
+  {/* Scrollable Feature list */}
+  <ul
+    className="
+      space-y-2 
+      mb-6 
+      relative 
+      z-10 
+      overflow-y-auto 
+      pr-2 
+      flex-1
+      scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-gray-800
+    "
+  >
+    {plan.features.map((feature, i) => (
+      <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
+        ✅ {feature}
+      </li>
+    ))}
+  </ul>
+
+  {/* Button */}
+  <Link
+    href={`/hire/${plan.name.toLowerCase()}`}
+    className={`relative z-10 w-full block text-center font-semibold py-3 rounded-xl bg-gradient-to-r ${plan.gradient} hover:opacity-90 transition`}
+  >
+    Choose {plan.name}
+  </Link>
+</motion.div>
+
         ))}
       </div>
     </section>
