@@ -44,7 +44,7 @@ export default function Testimonials() {
             </div>
 
             {/* Quote */}
-            <p className="italic text-gray-700 leading-relaxed mb-6 mx-auto text-lg">
+            <p className="italic text-gray-700 leading-relaxed mb-6 text-center text-lg">
               {t.quote}
             </p>
 
