@@ -11,7 +11,7 @@ export default function Testimonials() {
       <div className="absolute -bottom-10 -right-16 w-80 h-80 bg-purple-300 opacity-30 rounded-full blur-3xl"></div>
 
       <h3 className="text-3xl font-extrabold mb-12 text-gray-900 text-center">
-        What Our Readers Say
+        What Our Client Says
       </h3>
 
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
