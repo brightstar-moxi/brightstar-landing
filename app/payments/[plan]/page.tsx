@@ -1,28 +1,38 @@
 import { notFound } from "next/navigation";
-// import { PLANS, PlanType } from "../data/payment";
-import { PLANS,  PlanType } from "@/app/data/payment";
+import { PLANS, PlanType } from "@/app/data/payment";
 
 interface PaymentPageProps {
-  params: {
+  params: Promise<{
     plan: string;
-  };
+  }>;
 }
 
-export default function PaymentPage({ params }: PaymentPageProps) {
-  const planKey = params.plan as PlanType;
-  const plan = PLANS[planKey];
+export default async function PaymentPage({
+  params,
+}: PaymentPageProps) {
+  const { plan } = await params;
 
-  if (!plan) return notFound();
+  const planKey = plan.toLowerCase();
 
-  const compulsoryAmount = plan.fullPrice * 0.7;
-  const remainingAmount = plan.fullPrice - compulsoryAmount;
+  if (!Object.keys(PLANS).includes(planKey)) {
+    notFound();
+  }
+
+  const selectedPlan = PLANS[planKey as PlanType];
+
+  const compulsoryAmount = Number(
+    (selectedPlan.fullPrice * 0.7).toFixed(2)
+  );
+
+  const remainingAmount = Number(
+    (selectedPlan.fullPrice - compulsoryAmount).toFixed(2)
+  );
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 p-6">
       <div className="w-full max-w-xl bg-white rounded-2xl shadow-2xl p-8">
-        
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          {plan.name} Plan Payment
+          {selectedPlan.name} Plan Payment
         </h1>
 
         <p className="text-gray-500 mb-6">
@@ -33,34 +43,28 @@ export default function PaymentPage({ params }: PaymentPageProps) {
           <div className="flex justify-between text-lg">
             <span>Full Price</span>
             <span>
-              {plan.currency} {plan.fullPrice}
+              {selectedPlan.currency} {selectedPlan.fullPrice}
             </span>
           </div>
 
           <div className="flex justify-between text-lg font-semibold text-indigo-600">
             <span>Compulsory (70%)</span>
             <span>
-              {plan.currency} {compulsoryAmount}
+              {selectedPlan.currency} {compulsoryAmount}
             </span>
           </div>
 
           <div className="flex justify-between text-sm text-gray-500">
             <span>Remaining (30%)</span>
             <span>
-              {plan.currency} {remainingAmount}
+              {selectedPlan.currency} {remainingAmount}
             </span>
           </div>
         </div>
 
-        <button
-          className="w-full mt-8 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition"
-          onClick={() => {
-            console.log("Proceed to payment");
-          }}
-        >
+        <button className="w-full mt-8 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition">
           Proceed to Payment
         </button>
-
       </div>
     </div>
   );
