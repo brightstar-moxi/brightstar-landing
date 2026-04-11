@@ -1,11 +1,12 @@
-import { CVData } from "../types";
+import { CVData } from "../cv-builder/types";
 
 interface Props {
   data: CVData;
   setData: (data: CVData) => void;
+  onDownload: () => void;
 }
 
-export default function FormSection({ data, setData }: Props) {
+export default function FormSection({ data, setData, onDownload }: Props) {
   const updateField = (field: keyof CVData, value: string) => {
     setData({ ...data, [field]: value });
   };
@@ -41,6 +42,13 @@ export default function FormSection({ data, setData }: Props) {
         value={data.experience}
         onChange={(e) => updateField("experience", e.target.value)}
       />
+
+      <button
+        onClick={onDownload}
+        className="w-full mt-6 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition"
+      >
+        Download CV
+      </button>
     </div>
   );
 }
