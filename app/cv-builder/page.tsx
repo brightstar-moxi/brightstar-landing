@@ -7,8 +7,8 @@ import { CVData } from "./types";
 
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
+// import { useMutation } from "convex/react";
+// import { api } from "../../convex/_generated/api";
 
 
 
@@ -28,7 +28,7 @@ export default function CVBuilderPage() {
     const canvas = await html2canvas(cvRef.current, {
       scale: 2,
        backgroundColor: "#ffffff",
-    });
+    });  
 
     const imgData = canvas.toDataURL("image/png");
 
