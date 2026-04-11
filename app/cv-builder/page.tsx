@@ -7,8 +7,8 @@ import { CVData } from "./types";
 
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-// import { useMutation } from "convex/react";
-// import { api } from "../../convex/_generated/api";
+import { useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
 
 
 
@@ -21,7 +21,7 @@ export default function CVBuilderPage() {
   });
 
   const cvRef = useRef<HTMLDivElement>(null);
-// const saveCV = useMutation(api.cv.saveCV);
+ const saveCV = useMutation(api.cv.saveCV);
   const handleDownload = async () => {
     if (!cvRef.current) return;
 
