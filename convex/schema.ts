@@ -13,5 +13,9 @@ export default defineSchema({
     createdAt: v.number(),
     name: v.string(), // optional
   }).index("by_email", ["email"]),
-
+ cvs: defineTable({
+    email: v.string(),
+    data: v.any(),
+    createdAt: v.number(),
+  }),
 });

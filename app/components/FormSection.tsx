@@ -4,9 +4,10 @@ interface Props {
   data: CVData;
   setData: (data: CVData) => void;
   onDownload: () => void;
+   onSave: () => void;
 }
 
-export default function FormSection({ data, setData, onDownload }: Props) {
+export default function FormSection({ data, setData, onDownload, onSave  }: Props) {
   const updateField = (field: keyof CVData, value: string) => {
     setData({ ...data, [field]: value });
   };
@@ -49,6 +50,12 @@ export default function FormSection({ data, setData, onDownload }: Props) {
       >
         Download CV
       </button>
+      <button
+  onClick={onSave}
+  className="w-full mt-3 bg-black text-white py-3 rounded-xl"
+>
+  Save CV
+</button>
     </div>
   );
 }

@@ -7,6 +7,10 @@ import { CVData } from "./types";
 
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
+
+
 
 export default function CVBuilderPage() {
   const [data, setData] = useState<CVData>({
@@ -17,7 +21,7 @@ export default function CVBuilderPage() {
   });
 
   const cvRef = useRef<HTMLDivElement>(null);
-
+// const saveCV = useMutation(api.cv.saveCV);
   const handleDownload = async () => {
     if (!cvRef.current) return;
 
@@ -37,6 +41,14 @@ export default function CVBuilderPage() {
     pdf.save("cv.pdf");
   };
 
+  const handleSave = async () => {
+  const email = prompt("Enter your email to save your CV:");
+  if (!email) return;
+
+  // next: send to Convex
+  console.log("Saving CV for:", email);
+};
+
   return (
     <div className="min-h-screen bg-slate-100 p-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -46,6 +58,7 @@ export default function CVBuilderPage() {
           data={data}
           setData={setData}
           onDownload={handleDownload}
+          onSave={handleSave}
         />
 
         {/* RIGHT: PREVIEW */}
