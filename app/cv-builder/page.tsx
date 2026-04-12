@@ -10,25 +10,36 @@ import jsPDF from "jspdf";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
+export default function CVBuilderPage({ initialData }: { initialData?: CVData }) {
+  // 🧠 Main state
+  const [data, setData] = useState<CVData>(
+    initialData || {
+      fullName: "",
+      email: "",
+      skills: "",
+      experience: "",
+    }
+  );
 
-
-export default function CVBuilderPage() {
-  const [data, setData] = useState<CVData>({
-    fullName: "",
-    email: "",
-    skills: "",
-    experience: "",
-  });
-
+  // 📄 Ref
   const cvRef = useRef<HTMLDivElement>(null);
- const saveCV = useMutation(api.cv.saveCV);
+
+  // 📡 Convex
+  const saveCV = useMutation(api.cv.saveCV);
+
+  // 🎛 Modal state
+  const [showModal, setShowModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // 📥 Download
   const handleDownload = async () => {
     if (!cvRef.current) return;
 
     const canvas = await html2canvas(cvRef.current, {
       scale: 2,
-       backgroundColor: "#ffffff",
-    });  
+      backgroundColor: "#ffffff",
+    });
 
     const imgData = canvas.toDataURL("image/png");
 
@@ -41,35 +52,78 @@ export default function CVBuilderPage() {
     pdf.save("cv.pdf");
   };
 
-  const handleSave = async () => {
-  const email = prompt("Enter your email to save your CV:");
-  if (!email) return;
+  // 🧾 Open modal
+  const handleSaveClick = () => {
+    setShowModal(true);
+  };
 
-  // next: send to Convex
-  console.log("Saving CV for:", email);
-};
+  // 💾 Save CV
+  const handleConfirmSave = async () => {
+    if (!email) return;
+
+    setLoading(true);
+
+    try {
+      const id = await saveCV({ email, data });
+
+      const link = `${window.location.origin}/cv-builder/${id}`;
+
+      console.log("Magic link:", link);
+      alert("Check your email for your CV link");
+
+      setShowModal(false);
+      setEmail("");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to save");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-100 p-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        {/* LEFT: FORM */}
+        {/* FORM */}
         <FormSection
           data={data}
           setData={setData}
           onDownload={handleDownload}
-          onSave={handleSave}
+          onSave={handleSaveClick}
         />
 
-        {/* RIGHT: PREVIEW */}
+        {/* PREVIEW */}
         <div className="flex justify-center">
           <CVPreview ref={cvRef} data={data} />
         </div>
 
       </div>
+
+      {/* MODAL */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-xl w-full max-w-md">
+            <h2 className="text-lg font-semibold mb-4">Save your CV</h2>
+
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full p-3 border rounded mb-4"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <button
+              onClick={handleConfirmSave}
+              disabled={loading}
+              className="w-full bg-indigo-600 text-white py-3 rounded"
+            >
+              {loading ? "Saving..." : "Save & Send Link"}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
-
-
