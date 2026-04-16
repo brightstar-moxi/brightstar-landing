@@ -14,10 +14,10 @@ export default function FormSection({ data, setData, onDownload, onSave  }: Prop
 
   return (
     <div className="bg-white p-6 rounded-xl shadow">
-      <h2 className="text-xl font-semibold mb-4">Fill Your Details</h2>
+      <h2 className="text-black text-xl font-semibold mb-4">Fill Your Details</h2>
 
       <input
-        className="w-full mb-4 p-3 border rounded"
+        className="w-full mb-4 p-3 border rounded border-black text-gray-700"
         placeholder="Full Name"
         value={data.fullName}
         onChange={(e) => updateField("fullName", e.target.value)}
@@ -31,14 +31,14 @@ export default function FormSection({ data, setData, onDownload, onSave  }: Prop
       />
 
       <textarea
-        className="w-full mb-4 p-3 border rounded"
+        className="w-full mb-4 p-3 border rounded border-black text-gray-700"
         placeholder="Skills (comma separated)"
         value={data.skills}
         onChange={(e) => updateField("skills", e.target.value)}
       />
 
       <textarea
-        className="w-full mb-4 p-3 border rounded"
+        className="w-full mb-4 p-3 border rounded border-black text-gray-700"
         placeholder="Experience"
         value={data.experience}
         onChange={(e) => updateField("experience", e.target.value)}

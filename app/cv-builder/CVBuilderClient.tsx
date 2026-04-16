@@ -47,34 +47,35 @@ export default function CVBuilderClient({ initialData }: { initialData?: CVData 
 
   const handleSaveClick = () => setShowModal(true);
 
-  const handleConfirmSave = async () => {
-    if (!email) return;
+ const handleConfirmSave = async () => {
+  if (!email) return;
 
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      const id = await saveCV({ email, data });
+  try {
+    const id = await saveCV({ email, data });
 
-      const link = `${window.location.origin}/cv-builder/${id}`;
+    const link = `${window.location.origin}/cv-builder/${id}`;
 
-      await fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, link }),
-      });
+    await fetch("/api/send-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, link }),
+    });
 
-      setShowModal(false);
-      setEmail("");
-      alert("Check your email for your CV link");
-    } catch (err) {
-      console.error(err);
-      alert("Failed to save");
-    } finally {
-      setLoading(false);
-    }
-  };
+    alert("Check your email for your CV link");
+
+    setShowModal(false);
+    setEmail("");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to save");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-slate-100 p-6">
