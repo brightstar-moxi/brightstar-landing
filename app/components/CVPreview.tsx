@@ -1,43 +1,69 @@
 "use client";
 
-import { CVData } from "../cv-builder/types";
 import { forwardRef } from "react";
+import { CVData } from "../cv-builder/types";
 
 const CVPreview = forwardRef<HTMLDivElement, { data: CVData }>(
   ({ data }, ref) => {
-    const skills = data.skills.split(",").map((s) => s.trim());
+    const skills = data.skills
+      ? data.skills.split(",").map((s) => s.trim())
+      : [];
 
     return (
       <div
         ref={ref}
-        style={{
-          backgroundColor: "#ffffff",
-          color: "#000000",
-        }}
-        className="p-8 rounded-xl shadow w-full max-w-[600px]"
+        className="w-full max-w-[750px] bg-white shadow-xl rounded-xl overflow-hidden"
+        style={{ color: "#111827" }}
       >
-        <h1 className="text-2xl font-bold">
-          {data.fullName || "Your Name"}
-        </h1>
-
-        <p style={{ color: "#6b7280" }}>
-          {data.email || "your@email.com"}
-        </p>
-
-        <div className="mb-6">
-          <h2 className="font-semibold border-b pb-1 mb-2">Skills</h2>
-          <ul className="list-disc ml-5">
-            {skills.map((skill, i) => (
-              <li key={i}>{skill || "Skill"}</li>
-            ))}
-          </ul>
+        {/* HEADER */}
+        <div className="bg-slate-900 text-white p-8">
+          <h1 className="text-3xl font-bold tracking-tight">
+            {data.fullName || "Your Name"}
+          </h1>
+          <p className="text-sm text-slate-300 mt-1">
+            {data.email || "your@email.com"}
+          </p>
         </div>
 
-        <div>
-          <h2 className="font-semibold border-b pb-1 mb-2">Experience</h2>
-          <p className="text-sm whitespace-pre-line">
-            {data.experience || "Your experience will appear here..."}
-          </p>
+        {/* BODY */}
+        <div className="p-8 space-y-8">
+
+          {/* SKILLS */}
+          <section>
+            <h2 className="text-sm font-semibold uppercase tracking-widest text-slate-500 mb-3">
+              Skills
+            </h2>
+
+            <div className="flex flex-wrap gap-2">
+              {skills.length > 0 ? (
+                skills.map((skill, i) => (
+                  <span
+                    key={i}
+                    className="px-3 py-1 text-sm bg-slate-100 rounded-full border"
+                  >
+                    {skill}
+                  </span>
+                ))
+              ) : (
+                <span className="text-sm text-gray-400">
+                  Your skills will appear here
+                </span>
+              )}
+            </div>
+          </section>
+
+          {/* EXPERIENCE */}
+          <section>
+            <h2 className="text-sm font-semibold uppercase tracking-widest text-slate-500 mb-3">
+              Experience
+            </h2>
+
+            <p className="text-sm leading-relaxed whitespace-pre-line text-gray-700">
+              {data.experience ||
+                "Your experience will appear here..."}
+            </p>
+          </section>
+
         </div>
       </div>
     );
