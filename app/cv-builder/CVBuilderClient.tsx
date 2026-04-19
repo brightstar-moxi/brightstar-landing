@@ -143,32 +143,54 @@ export default function CVBuilderClient({
 
       {/* ✅ MODAL */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-xl w-full max-w-md">
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
 
-            <h2 className="text-lg font-semibold mb-4">
-              Save your CV
-            </h2>
+    <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 relative">
 
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="w-full p-3 border rounded mb-4"
-            />
+      {/* CLOSE BUTTON */}
+      <button
+        onClick={() => setShowModal(false)}
+        className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-xl"
+      >
+        ×
+      </button>
 
-            <button
-              onClick={handleConfirmSave}
-              disabled={loading}
-              className="w-full bg-indigo-600 text-white py-3 rounded"
-            >
-              {loading ? "Saving..." : "Save & Send Link"}
-            </button>
+      {/* HEADER */}
+      <h2 className="text-xl font-semibold text-gray-800 mb-2">
+        Save your CV
+      </h2>
 
-          </div>
-        </div>
-      )}
+      <p className="text-sm text-gray-500 mb-5">
+        Enter your email to receive a link and continue editing anytime.
+      </p>
+
+      {/* INPUT */}
+      <input
+        type="email"
+        name="email"
+        autoComplete="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="you@example.com"
+        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 mb-4"
+      />
+
+      {/* ACTION BUTTON */}
+      <button
+        onClick={handleConfirmSave}
+        disabled={loading}
+        className={`w-full py-3 rounded-lg font-medium text-white transition ${
+          loading
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-indigo-600 hover:bg-indigo-700"
+        }`}
+      >
+        {loading ? "Saving..." : "Save & Get Link"}
+      </button>
+
+    </div>
+  </div>
+)}
     </div>
   );
 }
