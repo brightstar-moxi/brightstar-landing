@@ -10,7 +10,11 @@ import jsPDF from "jspdf";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
-export default function CVBuilderClient({ initialData }: { initialData?: CVData }) {
+export default function CVBuilderClient({
+  initialData,
+}: {
+  initialData?: CVData;
+}) {
   const [data, setData] = useState<CVData>(
     initialData || {
       fullName: "",
@@ -19,7 +23,7 @@ export default function CVBuilderClient({ initialData }: { initialData?: CVData 
       experience: "",
     }
   );
-
+ const [copied, setCopied] = useState(false);
   const cvRef = useRef<HTMLDivElement>(null);
   const saveCV = useMutation(api.cv.saveCV);
 
@@ -27,6 +31,10 @@ export default function CVBuilderClient({ initialData }: { initialData?: CVData 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const [generatedLink, setGeneratedLink] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  // 📄 DOWNLOAD
   const handleDownload = async () => {
     if (!cvRef.current) return;
 
@@ -36,8 +44,8 @@ export default function CVBuilderClient({ initialData }: { initialData?: CVData 
     });
 
     const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
 
+    const pdf = new jsPDF("p", "mm", "a4");
     const imgWidth = 210;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
@@ -45,40 +53,79 @@ export default function CVBuilderClient({ initialData }: { initialData?: CVData 
     pdf.save("cv.pdf");
   };
 
+  // OPEN MODAL
   const handleSaveClick = () => setShowModal(true);
 
- const handleConfirmSave = async () => {
-  if (!email) return;
+  // SAVE
+  const handleConfirmSave = async () => {
+    if (!email) return;
 
-  setLoading(true);
+    setLoading(true);
 
-  try {
-    const id = await saveCV({ email, data });
+    try {
+      const id = await saveCV({ email, data });
 
-    const link = `${window.location.origin}/cv-builder/${id}`;
+      const link = `${window.location.origin}/cv-builder/${id}`;
 
-    await fetch("/api/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, link }),
-    });
+      // ✅ SHOW SUCCESS UI
+      setGeneratedLink(link);
+      setShowSuccess(true);
 
-    alert("Check your email for your CV link");
+      // OPTIONAL EMAIL (won’t break UI if it fails)
+      try {
+        await fetch("/api/send-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, link }),
+        });
+      } catch {
+        console.warn("Email failed");
+      }
 
-    setShowModal(false);
-    setEmail("");
-  } catch (err) {
-    console.error(err);
-    alert("Failed to save");
-  } finally {
-    setLoading(false);
-  }
-};
+      setShowModal(false);
+      setEmail("");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to save");
+    } finally {
+      setLoading(false);
+    }
+   
+  };
 
   return (
     <div className="min-h-screen bg-slate-100 p-6">
+
+      {/* ✅ SUCCESS UI */}
+      {showSuccess && (
+        <div className="max-w-7xl mx-auto mb-4 p-4 bg-green-100 rounded">
+          <p className="text-sm mb-2">Your CV link:</p>
+
+          <input
+            value={generatedLink}
+            readOnly
+            className="w-full p-2 border rounded"
+          />
+
+          <button
+           onClick={() => {
+  navigator.clipboard.writeText(generatedLink);
+  setCopied(true);
+
+  setTimeout(() => {
+    setCopied(false);
+  }, 2000); // reset after 2s
+}}
+            className="mt-2 bg-black text-white px-4 py-2 rounded"
+          >
+           {copied ? "Copied!" : "Copy Link"}
+          </button>
+        </div>
+      )}
+
+      {/* MAIN */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
 
         <FormSection
@@ -94,17 +141,21 @@ export default function CVBuilderClient({ initialData }: { initialData?: CVData 
 
       </div>
 
+      {/* ✅ MODAL */}
       {showModal && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
           <div className="bg-white p-6 rounded-xl w-full max-w-md">
-            <h2 className="text-lg font-semibold mb-4">Save your CV</h2>
+
+            <h2 className="text-lg font-semibold mb-4">
+              Save your CV
+            </h2>
 
             <input
               type="email"
-              className="w-full p-3 border rounded mb-4"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
+              className="w-full p-3 border rounded mb-4"
             />
 
             <button
@@ -114,6 +165,7 @@ export default function CVBuilderClient({ initialData }: { initialData?: CVData 
             >
               {loading ? "Saving..." : "Save & Send Link"}
             </button>
+
           </div>
         </div>
       )}

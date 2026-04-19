@@ -24,7 +24,7 @@ export default function FormSection({ data, setData, onDownload, onSave  }: Prop
       />
 
       <input
-        className="w-full mb-4 p-3 border rounded"
+        className="w-full mb-4 p-3 border rounded border-black text-gray-700 text"
         placeholder="Email"
         value={data.email}
         onChange={(e) => updateField("email", e.target.value)}
