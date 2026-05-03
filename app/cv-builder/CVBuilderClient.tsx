@@ -10,6 +10,8 @@ import jsPDF from "jspdf";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
+import { TEMPLATES } from "./templates";
+
 export default function CVBuilderClient({
   initialData,
 }: {
@@ -27,6 +29,8 @@ export default function CVBuilderClient({
   const cvRef = useRef<HTMLDivElement>(null);
   const saveCV = useMutation(api.cv.saveCV);
 
+  const [step, setStep] = useState<"template" | "builder">("template");
+  const [selectedTemplate, setSelectedTemplate] = useState("modern");
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -94,7 +98,40 @@ export default function CVBuilderClient({
     }
    
   };
+if (step === "template") {
+  return (
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-6">
+      <div className="max-w-5xl w-full">
+        <h1 className="text-3xl font-bold text-center mb-3">
+          Choose Your CV Template
+        </h1>
 
+        <p className="text-center text-gray-500 mb-8">
+          Select a design before filling your details.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {TEMPLATES.map((tpl) => (
+            <div
+              key={tpl.id}
+              onClick={() => {
+                setSelectedTemplate(tpl.id);
+                setStep("builder");
+              }}
+              className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer hover:scale-105 transition"
+            >
+              <h2 className="text-lg font-semibold">{tpl.name}</h2>
+
+              {tpl.premium && (
+                <span className="text-xs text-indigo-600">PRO</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
   return (
     <div className="min-h-screen bg-slate-100 p-6">
 
@@ -127,7 +164,32 @@ export default function CVBuilderClient({
 
       {/* MAIN */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+<div className="mb-6">
+  <h2 className="text-lg font-semibold mb-3">Choose a Template</h2>
 
+  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+    {TEMPLATES.map((tpl) => (
+      <div
+        key={tpl.id}
+       onClick={() => {
+  setSelectedTemplate(tpl.id);
+  setStep("builder");
+}}
+        className={`p-4 border rounded-xl cursor-pointer transition ${
+          selectedTemplate === tpl.id
+            ? "border-indigo-600 bg-indigo-50"
+            : "hover:border-gray-400"
+        }`}
+      >
+        <p className="font-medium">{tpl.name}</p>
+
+        {tpl.premium && (
+          <span className="text-xs text-indigo-600">PRO</span>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
         <FormSection
           data={data}
           setData={setData}
@@ -136,7 +198,11 @@ export default function CVBuilderClient({
         />
 
         <div className="flex justify-center">
-          <CVPreview ref={cvRef} data={data} />
+         <CVPreview
+  ref={cvRef}
+  data={data}
+  template={selectedTemplate}
+/>
         </div>
 
       </div>

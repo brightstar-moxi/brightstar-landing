@@ -71,8 +71,8 @@ import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import ConvexClientProvider from "./ConvexClientProvider"; // We'll create this
-import toast, { Toaster } from "react-hot-toast";
-
+// import toast, { Toaster } from "react-hot-toast";
+import ToasterProvider from "./components/ToasterProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -80,11 +80,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ConvexClientProvider>
-           <Toaster position="top-center" />
-          {children}
-          <Analytics />
-        </ConvexClientProvider>
+       <ConvexClientProvider>
+  <ToasterProvider/>
+  {children}
+  <Analytics />
+</ConvexClientProvider>
       </body>
     </html>
   );
