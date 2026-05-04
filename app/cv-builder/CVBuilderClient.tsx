@@ -29,6 +29,7 @@ export default function CVBuilderClient({
   const cvRef = useRef<HTMLDivElement>(null);
   const saveCV = useMutation(api.cv.saveCV);
 
+  const [previewTemplate, setPreviewTemplate] = useState<string | null>(null);
   const [step, setStep] = useState<"template" | "builder">("template");
   const [selectedTemplate, setSelectedTemplate] = useState("modern");
   const [showModal, setShowModal] = useState(false);
@@ -114,10 +115,7 @@ if (step === "template") {
           {TEMPLATES.map((tpl) => (
             <div
               key={tpl.id}
-              onClick={() => {
-                setSelectedTemplate(tpl.id);
-                setStep("builder");
-              }}
+              onClick={() => setPreviewTemplate(tpl.id)}
               className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer hover:scale-105 transition"
             >
               <h2 className="text-lg font-semibold">{tpl.name}</h2>
@@ -129,6 +127,45 @@ if (step === "template") {
           ))}
         </div>
       </div>
+      {previewTemplate && (
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+    <div className="bg-white w-full max-w-4xl rounded-xl p-6">
+
+      <h2 className="text-xl font-semibold mb-4">
+        Preview Template
+      </h2>
+
+      {/* TEMPLATE PREVIEW */}
+      <div className="border rounded-lg p-4 max-h-[500px] overflow-auto mb-6">
+        <CVPreview
+          data={data}
+          template={previewTemplate}
+        />
+      </div>
+
+      {/* ACTIONS */}
+      <div className="flex justify-end gap-3">
+        <button
+          onClick={() => setPreviewTemplate(null)}
+          className="px-4 py-2 border rounded"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={() => {
+            setSelectedTemplate(previewTemplate);
+            setPreviewTemplate(null);
+            setStep("builder");
+          }}
+          className="px-4 py-2 bg-indigo-600 text-white rounded"
+        >
+          Use This Template
+        </button>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }
@@ -164,32 +201,7 @@ if (step === "template") {
 
       {/* MAIN */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-<div className="mb-6">
-  <h2 className="text-lg font-semibold mb-3">Choose a Template</h2>
 
-  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-    {TEMPLATES.map((tpl) => (
-      <div
-        key={tpl.id}
-       onClick={() => {
-  setSelectedTemplate(tpl.id);
-  setStep("builder");
-}}
-        className={`p-4 border rounded-xl cursor-pointer transition ${
-          selectedTemplate === tpl.id
-            ? "border-indigo-600 bg-indigo-50"
-            : "hover:border-gray-400"
-        }`}
-      >
-        <p className="font-medium">{tpl.name}</p>
-
-        {tpl.premium && (
-          <span className="text-xs text-indigo-600">PRO</span>
-        )}
-      </div>
-    ))}
-  </div>
-</div>
         <FormSection
           data={data}
           setData={setData}
