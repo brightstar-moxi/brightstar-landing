@@ -5,18 +5,32 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function ThankYouPage() {
+  // Generate confetti ONCE (safe)
+  const [confetti] = useState(() =>
+    Array.from({ length: 40 }).map(() => ({
+      top: Math.random() * 90,
+      left: Math.random() * 90,
+      color: `hsl(${Math.random() * 360}, 90%, 60%)`,
+    }))
+  );
+
+  // Control visibility only
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setShowConfetti(true), 300);
+    const timer = setTimeout(() => {
+      setShowConfetti(true);
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
 
-      {/* Confetti Dots */}
+      {/* Confetti */}
       {showConfetti &&
-        [...Array(40)].map((_, i) => (
+        confetti.map((dot, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: -20 }}
@@ -28,14 +42,14 @@ export default function ThankYouPage() {
             }}
             className="absolute w-2 h-2 rounded-full"
             style={{
-              top: `${Math.random() * 90}%`,
-              left: `${Math.random() * 90}%`,
-              background: `hsl(${Math.random() * 360}, 90%, 60%)`,
+              top: `${dot.top}%`,
+              left: `${dot.left}%`,
+              background: dot.color,
             }}
           />
         ))}
 
-      {/* Main Success Card */}
+      {/* Main Card */}
       <motion.div
         initial={{ opacity: 0, y: 40, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -71,7 +85,7 @@ export default function ThankYouPage() {
         </Link>
       </motion.div>
 
-      {/* Soft glow effect at bottom */}
+      {/* Glow */}
       <div className="absolute bottom-0 w-full h-40 bg-gradient-to-t from-teal-500/10 to-transparent blur-xl"></div>
     </div>
   );
