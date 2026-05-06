@@ -3,4 +3,10 @@ export interface CVData {
   email: string;
   skills: string;
   experience: string;
+
+  // NEW
+  summary?: string;
+  education?: string;
+  jobTitle?: string;
+  location?: string;
 }

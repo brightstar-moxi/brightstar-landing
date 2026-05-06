@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ebooks } from "../data/ebook";
+// import Image from "next/image";
 
 export default function FeaturedEbooks() {
   return (

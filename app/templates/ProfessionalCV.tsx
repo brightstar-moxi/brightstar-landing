@@ -1,9 +1,13 @@
 "use client";
 
 import { forwardRef } from "react";
-import { CVData } from "../cv-builder/types";
+import { CVData } from "@/app/cv-builder/types";
 
-const ProfessionalCV = forwardRef<HTMLDivElement, { data: CVData }>(
+interface Props {
+  data: CVData;
+}
+
+const ProfessionalCV = forwardRef<HTMLDivElement, Props>(
   ({ data }, ref) => {
     const skills = data.skills
       ? data.skills.split(",").map((s) => s.trim())
@@ -12,56 +16,107 @@ const ProfessionalCV = forwardRef<HTMLDivElement, { data: CVData }>(
     return (
       <div
         ref={ref}
-        className="w-full max-w-[900px] bg-white shadow-xl rounded-xl overflow-hidden flex"
-        style={{ color: "#111827" }}
+        className="w-full max-w-[900px] bg-white shadow-2xl rounded-xl overflow-hidden grid grid-cols-3"
+        style={{ fontFamily: "Inter, sans-serif", color: "#111827" }}
       >
         {/* SIDEBAR */}
-        <aside className="w-1/3 bg-gray-100 p-8 space-y-8">
-          {/* NAME */}
+        <div className="col-span-1 bg-gray-900 text-white p-6 space-y-8">
           <div>
             <h1 className="text-xl font-bold">
               {data.fullName || "Your Name"}
             </h1>
-            <p className="text-sm text-gray-600 mt-1">
-              {data.email || "your@email.com"}
-            </p>
+
+            {data.jobTitle && (
+              <p className="text-sm text-gray-300 mt-1">
+                {data.jobTitle}
+              </p>
+            )}
+          </div>
+
+          {/* CONTACT */}
+          <div>
+            <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-2">
+              Contact
+            </h2>
+
+            <div className="text-sm space-y-1">
+              <p>{data.email || "your@email.com"}</p>
+              {data.location && <p>{data.location}</p>}
+            </div>
           </div>
 
           {/* SKILLS */}
           <div>
-            <h2 className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+            <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-2">
               Skills
             </h2>
 
-            <ul className="space-y-2">
+            <div className="flex flex-col gap-2">
               {skills.length > 0 ? (
                 skills.map((skill, i) => (
-                  <li key={i} className="text-sm text-gray-700">
-                    • {skill}
-                  </li>
+                  <div
+                    key={i}
+                    className="text-xs bg-gray-800 px-2 py-1 rounded"
+                  >
+                    {skill}
+                  </div>
                 ))
               ) : (
-                <li className="text-sm text-gray-400">
+                <span className="text-xs text-gray-500">
                   Your skills will appear here
-                </li>
+                </span>
               )}
-            </ul>
+            </div>
           </div>
-        </aside>
+
+          {/* EDUCATION */}
+          {data.education && (
+            <div>
+              <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-2">
+                Education
+              </h2>
+
+              <p className="text-sm text-gray-300">
+                {data.education}
+              </p>
+            </div>
+          )}
+        </div>
 
         {/* MAIN CONTENT */}
-        <main className="w-2/3 p-10">
-          <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-500 mb-4">
-            Experience
-          </h2>
+        <div className="col-span-2 p-8 space-y-8">
 
-          <p className="text-sm leading-relaxed text-gray-700 whitespace-pre-line">
-            {data.experience || "Your experience will appear here..."}
-          </p>
-        </main>
+          {/* SUMMARY */}
+          {data.summary && (
+            <section>
+              <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-500 mb-2">
+                Profile
+              </h2>
+
+              <p className="text-sm text-gray-700 leading-relaxed">
+                {data.summary}
+              </p>
+            </section>
+          )}
+
+          {/* EXPERIENCE */}
+          <section>
+            <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-500 mb-3">
+              Experience
+            </h2>
+
+            <p className="text-sm text-gray-700 whitespace-pre-line leading-relaxed">
+              {data.experience ||
+                "Your experience will appear here..."}
+            </p>
+          </section>
+
+        </div>
       </div>
     );
   }
 );
+
+ProfessionalCV.displayName = "ProfessionalCV";
 
 export default ProfessionalCV;

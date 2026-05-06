@@ -72,7 +72,6 @@
 
 // export default CVPreview;
 
-
 "use client";
 
 import { forwardRef } from "react";
@@ -89,22 +88,23 @@ interface Props {
 
 const CVPreview = forwardRef<HTMLDivElement, Props>(
   ({ data, template }, ref) => {
+    switch (template) {
+      case "modern":
+        return <ModernCV ref={ref} data={data} />;
 
-    if (template === "modern") {
-      return <ModernCV data={data} ref={ref} />;
+      case "minimal":
+        return <MinimalCV ref={ref} data={data} />;
+
+      case "professional":
+        return <ProfessionalCV ref={ref} data={data} />;
+
+      default:
+        return <ModernCV ref={ref} data={data} />;
     }
-
-    if (template === "minimal") {
-      return <MinimalCV data={data} ref={ref} />;
-    }
-
-    if (template === "professional") {
-      return <ProfessionalCV data={data} ref={ref} />;
-    }
-
-    // fallback
-    return <ModernCV data={data} ref={ref} />;
   }
 );
+
+// ✅ FIX (required for build)
+CVPreview.displayName = "CVPreview";
 
 export default CVPreview;
