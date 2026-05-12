@@ -101,9 +101,16 @@ const CVPreview = forwardRef<HTMLDivElement, Props>(
       default:
         return <ModernCV ref={ref} data={data} />;
     }
-  }
-);
+//     if (template === "modern-blue") {
+//   return <ModernCV data={data} ref={ref} />;
+// }
 
+// if (template === "modern-dark") {
+//   return <ModernDarkCV data={data} ref={ref} />;
+// }
+//   }
+// );
+  })
 // ✅ FIX (required for build)
 CVPreview.displayName = "CVPreview";
 

@@ -7,92 +7,231 @@ interface Props {
   data: CVData;
 }
 
-const MinimalCV = forwardRef<HTMLDivElement, Props>(({ data }, ref) => {
-  const skills = data.skills
-    ? data.skills.split(",").map((s) => s.trim())
-    : [];
+const MinimalCV = forwardRef<HTMLDivElement, Props>(
+  ({ data }, ref) => {
+    const skills = data.skills
+      ? data.skills.split(",").map((s) => s.trim())
+      : [];
 
-  return (
-    <div
-      ref={ref}
-      className="w-full max-w-[800px] bg-white shadow-xl rounded-xl p-10"
-      style={{ fontFamily: "Inter, sans-serif", color: "#111827" }}
-    >
-      {/* HEADER */}
-      <div className="mb-10">
-        <h1 className="text-3xl font-semibold tracking-tight">
-          {data.fullName || "Your Name"}
-        </h1>
+    return (
+      <div
+        id="cv-download"
+        ref={ref}
+        style={{
+          width: "100%",
+          maxWidth: "800px",
+          backgroundColor: "#ffffff",
+          color: "#111827",
+          fontFamily: "Arial, sans-serif",
+          borderRadius: "14px",
+          padding: "40px",
+          boxShadow: "0 8px 25px rgba(0,0,0,0.08)",
+        }}
+      >
+        {/* HEADER */}
+        <div
+          style={{
+            marginBottom: "40px",
+            borderBottom: "1px solid #e5e7eb",
+            paddingBottom: "24px",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "32px",
+              fontWeight: "700",
+              margin: 0,
+              color: "#111827",
+            }}
+          >
+            {data.fullName || "Your Name"}
+          </h1>
 
-        <div className="mt-2 text-sm text-gray-500 flex flex-wrap gap-4">
-          <span>{data.email || "your@email.com"}</span>
-          {data.location && <span>{data.location}</span>}
+          <div
+            style={{
+              marginTop: "12px",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "16px",
+              fontSize: "14px",
+              color: "#6b7280",
+            }}
+          >
+            <span>
+              {data.email || "your@email.com"}
+            </span>
+
+            {data.location && (
+              <span>{data.location}</span>
+            )}
+          </div>
+
+          {data.jobTitle && (
+            <p
+              style={{
+                marginTop: "12px",
+                fontSize: "15px",
+                color: "#374151",
+              }}
+            >
+              {data.jobTitle}
+            </p>
+          )}
         </div>
 
-        {data.jobTitle && (
-          <p className="mt-2 text-sm text-gray-600">
-            {data.jobTitle}
+        {/* SUMMARY */}
+        {data.summary && (
+          <section
+            style={{
+              marginBottom: "32px",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "12px",
+                fontWeight: "700",
+                textTransform: "uppercase",
+                letterSpacing: "2px",
+                color: "#9ca3af",
+                marginBottom: "10px",
+              }}
+            >
+              Summary
+            </h2>
+
+            <p
+              style={{
+                fontSize: "15px",
+                lineHeight: 1.8,
+                color: "#374151",
+                margin: 0,
+              }}
+            >
+              {data.summary}
+            </p>
+          </section>
+        )}
+
+        {/* EXPERIENCE */}
+        <section
+          style={{
+            marginBottom: "32px",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "12px",
+              fontWeight: "700",
+              textTransform: "uppercase",
+              letterSpacing: "2px",
+              color: "#9ca3af",
+              marginBottom: "10px",
+            }}
+          >
+            Experience
+          </h2>
+
+          <p
+            style={{
+              fontSize: "15px",
+              lineHeight: 1.8,
+              color: "#374151",
+              whiteSpace: "pre-line",
+              margin: 0,
+            }}
+          >
+            {data.experience ||
+              "Your experience will appear here..."}
           </p>
+        </section>
+
+        {/* SKILLS */}
+        <section
+          style={{
+            marginBottom: "32px",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "12px",
+              fontWeight: "700",
+              textTransform: "uppercase",
+              letterSpacing: "2px",
+              color: "#9ca3af",
+              marginBottom: "10px",
+            }}
+          >
+            Skills
+          </h2>
+
+          {skills.length > 0 ? (
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "12px",
+              }}
+            >
+              {skills.map((skill, i) => (
+                <span
+                  key={i}
+                  style={{
+                    padding: "8px 14px",
+                    fontSize: "13px",
+                    backgroundColor: "#f3f4f6",
+                    color: "#111827",
+                    borderRadius: "9999px",
+                    border: "1px solid #d1d5db",
+                  }}
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <span
+              style={{
+                fontSize: "14px",
+                color: "#9ca3af",
+              }}
+            >
+              Your skills will appear here
+            </span>
+          )}
+        </section>
+
+        {/* EDUCATION */}
+        {data.education && (
+          <section>
+            <h2
+              style={{
+                fontSize: "12px",
+                fontWeight: "700",
+                textTransform: "uppercase",
+                letterSpacing: "2px",
+                color: "#9ca3af",
+                marginBottom: "10px",
+              }}
+            >
+              Education
+            </h2>
+
+            <p
+              style={{
+                fontSize: "15px",
+                lineHeight: 1.7,
+                color: "#374151",
+                margin: 0,
+              }}
+            >
+              {data.education}
+            </p>
+          </section>
         )}
       </div>
-
-      {/* SUMMARY */}
-      {data.summary && (
-        <section className="mb-8">
-          <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
-            Summary
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            {data.summary}
-          </p>
-        </section>
-      )}
-
-      {/* EXPERIENCE */}
-      <section className="mb-8">
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
-          Experience
-        </h2>
-
-        <p className="text-sm text-gray-700 whitespace-pre-line leading-relaxed">
-          {data.experience || "Your experience will appear here..."}
-        </p>
-      </section>
-
-      {/* SKILLS */}
-      <section className="mb-8">
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
-          Skills
-        </h2>
-
-        {skills.length > 0 ? (
-          <div className="flex flex-wrap gap-6 text-sm text-gray-700">
-            {skills.map((skill, i) => (
-              <span key={i}>{skill}</span>
-            ))}
-          </div>
-        ) : (
-          <span className="text-sm text-gray-400">
-            Your skills will appear here
-          </span>
-        )}
-      </section>
-
-      {/* EDUCATION */}
-      {data.education && (
-        <section>
-          <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
-            Education
-          </h2>
-
-          <p className="text-sm text-gray-700">
-            {data.education}
-          </p>
-        </section>
-      )}
-    </div>
-  );
-});
+    );
+  }
+);
 
 MinimalCV.displayName = "MinimalCV";
 

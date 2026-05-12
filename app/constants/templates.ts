@@ -1,7 +1,78 @@
 // app/constants/templates.ts
 
-export const TEMPLATE = [
-  { id: "modern", name: "Modern" },
-  { id: "minimal", name: "Minimal" },
-  { id: "professional", name: "Professional", premium: true },
+// export const TEMPLATE = [
+//   { id: "modern", name: "Modern" },
+//   { id: "minimal", name: "Minimal" },
+//   { id: "professional", name: "Professional", premium: true },
+// ];
+
+
+export const TEMPLATES = [
+  {
+    id: "modern",
+    name: "Modern",
+    image: "/templates/modern.png",
+  },
+  {
+    id: "minimal",
+    name: "Minimal",
+    image: "/templates/minimal.png",
+  },
+  {
+    id: "professional",
+    name: "Professional",
+    image: "/templates/professional.png",
+    premium: true,
+  },
 ];
+
+
+// export const TEMPLATES = [
+//   {
+//     category: "modern",
+//     designs: [
+//       {
+//         id: "modern-blue",
+//         name: "Modern Blue",
+//         preview: "/templates/modern-blue.png",
+//       },
+//       {
+//         id: "modern-dark",
+//         name: "Modern Dark",
+//         preview: "/templates/modern-dark.png",
+//       },
+//     ],
+//   },
+
+//   {
+//     category: "minimal",
+//     designs: [
+//       {
+//         id: "minimal-clean",
+//         name: "Minimal Clean",
+//         preview: "/templates/minimal-clean.png",
+//       },
+//       {
+//         id: "minimal-elegant",
+//         name: "Minimal Elegant",
+//         preview: "/templates/minimal-elegant.png",
+//       },
+//     ],
+//   },
+
+//   {
+//     category: "professional",
+//     designs: [
+//       {
+//         id: "professional-sidebar",
+//         name: "Professional Sidebar",
+//         preview: "/templates/professional-sidebar.png",
+//       },
+//       {
+//         id: "professional-executive",
+//         name: "Professional Executive",
+//         preview: "/templates/professional-executive.png",
+//       },
+//     ],
+//   },
+// ];

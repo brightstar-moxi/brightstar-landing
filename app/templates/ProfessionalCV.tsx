@@ -15,68 +15,184 @@ const ProfessionalCV = forwardRef<HTMLDivElement, Props>(
 
     return (
       <div
+        id="cv-download"
         ref={ref}
-        className="w-full max-w-[900px] bg-white shadow-2xl rounded-xl overflow-hidden grid grid-cols-3"
-        style={{ fontFamily: "Inter, sans-serif", color: "#111827" }}
+        style={{
+          width: "100%",
+          maxWidth: "900px",
+          backgroundColor: "#ffffff",
+          color: "#111827",
+          fontFamily: "Arial, sans-serif",
+          borderRadius: "16px",
+          overflow: "hidden",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
+          display: "grid",
+          gridTemplateColumns: "1fr 2fr",
+        }}
       >
         {/* SIDEBAR */}
-        <div className="col-span-1 bg-gray-900 text-white p-6 space-y-8">
-          <div>
-            <h1 className="text-xl font-bold">
+        <div
+          style={{
+            backgroundColor: "#111827",
+            color: "#ffffff",
+            padding: "32px 24px",
+            minHeight: "100%",
+          }}
+        >
+          {/* NAME */}
+          <div
+            style={{
+              marginBottom: "40px",
+            }}
+          >
+            <h1
+              style={{
+                fontSize: "28px",
+                fontWeight: "700",
+                margin: 0,
+              }}
+            >
               {data.fullName || "Your Name"}
             </h1>
 
             {data.jobTitle && (
-              <p className="text-sm text-gray-300 mt-1">
+              <p
+                style={{
+                  marginTop: "8px",
+                  fontSize: "15px",
+                  color: "#d1d5db",
+                }}
+              >
                 {data.jobTitle}
               </p>
             )}
           </div>
 
           {/* CONTACT */}
-          <div>
-            <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-2">
+          <div
+            style={{
+              marginBottom: "36px",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "12px",
+                fontWeight: "700",
+                textTransform: "uppercase",
+                letterSpacing: "2px",
+                color: "#9ca3af",
+                marginBottom: "12px",
+              }}
+            >
               Contact
             </h2>
 
-            <div className="text-sm space-y-1">
-              <p>{data.email || "your@email.com"}</p>
-              {data.location && <p>{data.location}</p>}
+            <div
+              style={{
+                fontSize: "14px",
+                lineHeight: 1.8,
+                color: "#f3f4f6",
+              }}
+            >
+              <p
+                style={{
+                  margin: 0,
+                }}
+              >
+                {data.email || "your@email.com"}
+              </p>
+
+              {data.location && (
+                <p
+                  style={{
+                    marginTop: "6px",
+                  }}
+                >
+                  {data.location}
+                </p>
+              )}
             </div>
           </div>
 
           {/* SKILLS */}
-          <div>
-            <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-2">
+          <div
+            style={{
+              marginBottom: "36px",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "12px",
+                fontWeight: "700",
+                textTransform: "uppercase",
+                letterSpacing: "2px",
+                color: "#9ca3af",
+                marginBottom: "12px",
+              }}
+            >
               Skills
             </h2>
 
-            <div className="flex flex-col gap-2">
-              {skills.length > 0 ? (
-                skills.map((skill, i) => (
+            {skills.length > 0 ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                {skills.map((skill, i) => (
                   <div
                     key={i}
-                    className="text-xs bg-gray-800 px-2 py-1 rounded"
+                    style={{
+                      backgroundColor: "#1f2937",
+                      padding: "8px 12px",
+                      borderRadius: "8px",
+                      fontSize: "13px",
+                      color: "#f9fafb",
+                      border: "1px solid #374151",
+                    }}
                   >
                     {skill}
                   </div>
-                ))
-              ) : (
-                <span className="text-xs text-gray-500">
-                  Your skills will appear here
-                </span>
-              )}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <span
+                style={{
+                  fontSize: "13px",
+                  color: "#6b7280",
+                }}
+              >
+                Your skills will appear here
+              </span>
+            )}
           </div>
 
           {/* EDUCATION */}
           {data.education && (
             <div>
-              <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-2">
+              <h2
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "700",
+                  textTransform: "uppercase",
+                  letterSpacing: "2px",
+                  color: "#9ca3af",
+                  marginBottom: "12px",
+                }}
+              >
                 Education
               </h2>
 
-              <p className="text-sm text-gray-300">
+              <p
+                style={{
+                  fontSize: "14px",
+                  lineHeight: 1.7,
+                  color: "#e5e7eb",
+                  margin: 0,
+                }}
+              >
                 {data.education}
               </p>
             </div>
@@ -84,16 +200,39 @@ const ProfessionalCV = forwardRef<HTMLDivElement, Props>(
         </div>
 
         {/* MAIN CONTENT */}
-        <div className="col-span-2 p-8 space-y-8">
-
-          {/* SUMMARY */}
+        <div
+          style={{
+            padding: "40px",
+          }}
+        >
+          {/* PROFILE */}
           {data.summary && (
-            <section>
-              <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-500 mb-2">
+            <section
+              style={{
+                marginBottom: "40px",
+              }}
+            >
+              <h2
+                style={{
+                  fontSize: "14px",
+                  fontWeight: "700",
+                  textTransform: "uppercase",
+                  letterSpacing: "2px",
+                  color: "#6b7280",
+                  marginBottom: "14px",
+                }}
+              >
                 Profile
               </h2>
 
-              <p className="text-sm text-gray-700 leading-relaxed">
+              <p
+                style={{
+                  fontSize: "15px",
+                  lineHeight: 1.8,
+                  color: "#374151",
+                  margin: 0,
+                }}
+              >
                 {data.summary}
               </p>
             </section>
@@ -101,16 +240,32 @@ const ProfessionalCV = forwardRef<HTMLDivElement, Props>(
 
           {/* EXPERIENCE */}
           <section>
-            <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-500 mb-3">
+            <h2
+              style={{
+                fontSize: "14px",
+                fontWeight: "700",
+                textTransform: "uppercase",
+                letterSpacing: "2px",
+                color: "#6b7280",
+                marginBottom: "14px",
+              }}
+            >
               Experience
             </h2>
 
-            <p className="text-sm text-gray-700 whitespace-pre-line leading-relaxed">
+            <p
+              style={{
+                fontSize: "15px",
+                lineHeight: 1.8,
+                color: "#374151",
+                whiteSpace: "pre-line",
+                margin: 0,
+              }}
+            >
               {data.experience ||
                 "Your experience will appear here..."}
             </p>
           </section>
-
         </div>
       </div>
     );

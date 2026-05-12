@@ -7,10 +7,11 @@ import { CVData } from "./types";
 
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
-import { TEMPLATE } from "../constants/templates";
+import { TEMPLATES } from "../constants/templates";
 
 export default function CVBuilderClient({
   initialData,
@@ -27,73 +28,125 @@ export default function CVBuilderClient({
   );
 
   const [copied, setCopied] = useState(false);
+
   const cvRef = useRef<HTMLDivElement>(null);
+
   const saveCV = useMutation(api.cv.saveCV);
 
-  const [previewTemplate, setPreviewTemplate] = useState<string | null>(null);
-  const [step, setStep] = useState<"template" | "builder">("template");
-  const [selectedTemplate, setSelectedTemplate] = useState("modern");
+  const [previewTemplate, setPreviewTemplate] =
+    useState<string | null>(null);
+
+  const [step, setStep] =
+    useState<"template" | "builder">("template");
+
+  const [selectedTemplate, setSelectedTemplate] =
+    useState("modern");
 
   const [showModal, setShowModal] = useState(false);
+
   const [email, setEmail] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   const [generatedLink, setGeneratedLink] = useState("");
+
   const [showSuccess, setShowSuccess] = useState(false);
 
-  // 📄 DOWNLOAD
+  // =========================
+  // DOWNLOAD PDF
+  // =========================
   const handleDownload = async () => {
     if (!cvRef.current) return;
 
-    const canvas = await html2canvas(cvRef.current, {
-      scale: 2,
-      backgroundColor: "#ffffff",
-    });
+    try {
+      const canvas = await html2canvas(cvRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#ffffff",
+      });
 
-    const imgData = canvas.toDataURL("image/png");
+      const imgData = canvas.toDataURL("image/png");
 
-    const pdf = new jsPDF("p", "mm", "a4");
-    const imgWidth = 210;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const pdf = new jsPDF("p", "mm", "a4");
 
-    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-    pdf.save("cv.pdf");
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+
+      const pdfHeight =
+        (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(
+        imgData,
+        "PNG",
+        0,
+        0,
+        pdfWidth,
+        pdfHeight
+      );
+
+      pdf.save("cv.pdf");
+    } catch (error) {
+      console.error("PDF download failed:", error);
+      alert("Failed to download CV");
+    }
   };
 
-  const handleSaveClick = () => setShowModal(true);
+  // =========================
+  // OPEN SAVE MODAL
+  // =========================
+  const handleSaveClick = () => {
+    setShowModal(true);
+  };
 
+  // =========================
+  // SAVE CV
+  // =========================
   const handleConfirmSave = async () => {
     if (!email) return;
 
     setLoading(true);
 
     try {
-      const id = await saveCV({ email, data });
-      const link = `${window.location.origin}/cv-builder/${id}`;
+      const id = await saveCV({
+        email,
+        data,
+      });
+
+      const link =
+        `${window.location.origin}/cv-builder/${id}`;
 
       setGeneratedLink(link);
+
       setShowSuccess(true);
 
       try {
         await fetch("/api/send-email", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, link }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            link,
+          }),
         });
-      } catch {}
+      } catch (error) {
+        console.error("Email failed:", error);
+      }
 
       setShowModal(false);
+
       setEmail("");
     } catch (error) {
       console.error(error);
-      alert("Failed to save");
+
+      alert("Failed to save CV");
     } finally {
       setLoading(false);
     }
   };
 
   // =========================
-  // TEMPLATE SELECTION SCREEN
+  // TEMPLATE SCREEN
   // =========================
   if (step === "template") {
     return (
@@ -108,23 +161,66 @@ export default function CVBuilderClient({
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TEMPLATE.map((tpl) => (
+            {TEMPLATES.map((tpl) => (
               <div
                 key={tpl.id}
-                onClick={() => setPreviewTemplate(tpl.id)}
-                className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer hover:scale-105 transition"
+                onClick={() =>
+                  setPreviewTemplate(tpl.id)
+                }
+                className="bg-white text-black rounded-2xl shadow-lg p-6 cursor-pointer hover:scale-105 transition"
               >
-                <h2 className="text-lg font-semibold">{tpl.name}</h2>
+                <h2 className="text-lg font-semibold">
+                  {tpl.name}
+                </h2>
 
                 {tpl.premium && (
-                  <span className="text-xs text-indigo-600">PRO</span>
+                  <span className="text-xs text-indigo-600">
+                    PRO
+                  </span>
                 )}
               </div>
             ))}
+
           </div>
         </div>
+ {/* {TEMPLATES.map((group) => (
+  <div key={group.category} className="mb-10">
 
-        {/* TEMPLATE PREVIEW MODAL */}
+    <h2 className="text-2xl font-bold mb-4 capitalize">
+      {group.category}
+    </h2>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      {group.designs.map((tpl) => (
+        <div
+          key={tpl.id}
+          onClick={() => {
+            setSelectedTemplate(tpl.id);
+            setStep("builder");
+          }}
+          className="bg-white rounded-2xl overflow-hidden shadow-lg cursor-pointer hover:scale-105 transition"
+        >
+
+          <img
+            src={tpl.preview}
+            alt={tpl.name}
+            className="w-full h-[320px] object-cover"
+          />
+
+          <div className="p-4">
+            <h3 className="font-semibold">
+              {tpl.name}
+            </h3>
+          </div>
+
+        </div>
+      ))}
+
+    </div>
+  </div>
+))} */}
+        {/* TEMPLATE PREVIEW */}
         {previewTemplate && (
           <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
             <div className="bg-white w-full max-w-4xl rounded-xl p-6">
@@ -133,12 +229,17 @@ export default function CVBuilderClient({
               </h2>
 
               <div className="border rounded-lg p-4 max-h-[500px] overflow-auto mb-6">
-                <CVPreview data={data} template={previewTemplate} />
+                <CVPreview
+                  data={data}
+                  template={previewTemplate}
+                />
               </div>
 
               <div className="flex justify-end gap-3">
                 <button
-                  onClick={() => setPreviewTemplate(null)}
+                  onClick={() =>
+                    setPreviewTemplate(null)
+                  }
                   className="px-4 py-2 border rounded"
                 >
                   Cancel
@@ -146,8 +247,12 @@ export default function CVBuilderClient({
 
                 <button
                   onClick={() => {
-                    setSelectedTemplate(previewTemplate);
+                    setSelectedTemplate(
+                      previewTemplate
+                    );
+
                     setPreviewTemplate(null);
+
                     setStep("builder");
                   }}
                   className="px-4 py-2 bg-indigo-600 text-white rounded"
@@ -171,7 +276,9 @@ export default function CVBuilderClient({
       {/* SUCCESS */}
       {showSuccess && (
         <div className="max-w-7xl mx-auto mb-4 p-4 bg-green-100 rounded">
-          <p className="text-sm mb-2">Your CV link:</p>
+          <p className="text-sm mb-2">
+            Your CV link:
+          </p>
 
           <input
             value={generatedLink}
@@ -181,9 +288,15 @@ export default function CVBuilderClient({
 
           <button
             onClick={() => {
-              navigator.clipboard.writeText(generatedLink);
+              navigator.clipboard.writeText(
+                generatedLink
+              );
+
               setCopied(true);
-              setTimeout(() => setCopied(false), 2000);
+
+              setTimeout(() => {
+                setCopied(false);
+              }, 2000);
             }}
             className="mt-2 bg-black text-white px-4 py-2 rounded"
           >
@@ -194,6 +307,7 @@ export default function CVBuilderClient({
 
       {/* MAIN */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+
         <FormSection
           data={data}
           setData={setData}
@@ -216,7 +330,9 @@ export default function CVBuilderClient({
           <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 relative">
 
             <button
-              onClick={() => setShowModal(false)}
+              onClick={() =>
+                setShowModal(false)
+              }
               className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-xl"
             >
               ×
@@ -233,7 +349,9 @@ export default function CVBuilderClient({
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) =>
+                setEmail(e.target.value)
+              }
               placeholder="you@example.com"
               className="w-full px-4 py-3 border rounded-lg mb-4"
             />
@@ -243,7 +361,9 @@ export default function CVBuilderClient({
               disabled={loading}
               className="w-full py-3 bg-indigo-600 text-white rounded-lg"
             >
-              {loading ? "Saving..." : "Save & Get Link"}
+              {loading
+                ? "Saving..."
+                : "Save & Get Link"}
             </button>
           </div>
         </div>
