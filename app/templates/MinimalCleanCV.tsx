@@ -14,20 +14,20 @@ const MinimalCV = forwardRef<HTMLDivElement, Props>(
       : [];
 
     return (
-      <div
-        id="cv-download"
-        ref={ref}
-        style={{
-          width: "100%",
-          maxWidth: "800px",
-          backgroundColor: "#ffffff",
-          color: "#111827",
-          fontFamily: "Arial, sans-serif",
-          borderRadius: "14px",
-          padding: "40px",
-          boxShadow: "0 8px 25px rgba(0,0,0,0.08)",
-        }}
-      >
+     <div
+  id="cv-download"
+  ref={ref}
+  style={{
+    width: "794px",
+    height: "1123px", // exact A4 height
+    backgroundColor: "#ffffff",
+    color: "#111827",
+    fontFamily: "Arial, sans-serif",
+    padding: "40px",
+    boxSizing: "border-box",
+    overflow: "hidden",
+  }}
+>
         {/* HEADER */}
         <div
           style={{

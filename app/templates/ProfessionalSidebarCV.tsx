@@ -14,22 +14,21 @@ const ProfessionalCV = forwardRef<HTMLDivElement, Props>(
       : [];
 
     return (
-      <div
-        id="cv-download"
-        ref={ref}
-        style={{
-          width: "100%",
-          maxWidth: "900px",
-          backgroundColor: "#ffffff",
-          color: "#111827",
-          fontFamily: "Arial, sans-serif",
-          borderRadius: "16px",
-          overflow: "hidden",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
-          display: "grid",
-          gridTemplateColumns: "1fr 2fr",
-        }}
-      >
+     <div
+  id="cv-download"
+  ref={ref}
+  style={{
+    width: "794px", // A4 width in px
+    minHeight: "1123px", // A4 height in px
+    backgroundColor: "#ffffff",
+    color: "#111827",
+    fontFamily: "Arial, sans-serif",
+    margin: "0 auto",
+    padding: "40px",
+    boxSizing: "border-box",
+    overflow: "hidden",
+  }}
+>
         {/* SIDEBAR */}
         <div
           style={{

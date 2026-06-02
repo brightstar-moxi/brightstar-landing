@@ -55,40 +55,74 @@ export default function CVBuilderClient({
   // =========================
   // DOWNLOAD PDF
   // =========================
+  // const handleDownload = async () => {
+  //   if (!cvRef.current) return;
+
+  //   try {
+  //     const canvas = await html2canvas(cvRef.current, {
+  //       scale: 2,
+  //       useCORS: true,
+  //       backgroundColor: "#ffffff",
+  //     });
+
+  //     const imgData = canvas.toDataURL("image/png");
+
+  //     const pdf = new jsPDF("p", "mm", "a4");
+
+  //     const pdfWidth = pdf.internal.pageSize.getWidth();
+
+  //     const pdfHeight =
+  //       (canvas.height * pdfWidth) / canvas.width;
+
+  //     pdf.addImage(
+  //       imgData,
+  //       "PNG",
+  //       0,
+  //       0,
+  //       pdfWidth,
+  //       pdfHeight
+  //     );
+
+  //     pdf.save("cv.pdf");
+  //   } catch (error) {
+  //     console.error("PDF download failed:", error);
+  //     alert("Failed to download CV");
+  //   }
+  // };
+
   const handleDownload = async () => {
+  try {
     if (!cvRef.current) return;
 
-    try {
-      const canvas = await html2canvas(cvRef.current, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: "#ffffff",
-      });
+    const canvas = await html2canvas(cvRef.current, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+    });
 
-      const imgData = canvas.toDataURL("image/png");
+    const imgData = canvas.toDataURL("image/jpeg", 1.0);
 
-      const pdf = new jsPDF("p", "mm", "a4");
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+    });
 
-      const pdfWidth = pdf.internal.pageSize.getWidth();
+    pdf.addImage(
+      imgData,
+      "JPEG",
+      0,
+      0,
+      210,
+      297
+    );
 
-      const pdfHeight =
-        (canvas.height * pdfWidth) / canvas.width;
-
-      pdf.addImage(
-        imgData,
-        "PNG",
-        0,
-        0,
-        pdfWidth,
-        pdfHeight
-      );
-
-      pdf.save("cv.pdf");
-    } catch (error) {
-      console.error("PDF download failed:", error);
-      alert("Failed to download CV");
-    }
-  };
+    pdf.save("cv.pdf");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to download PDF");
+  }
+};
 
   // =========================
   // OPEN SAVE MODAL
@@ -152,7 +186,7 @@ export default function CVBuilderClient({
     return (
       <div className="min-h-screen bg-slate-100 flex items-center justify-center p-6">
         <div className="max-w-5xl w-full">
-          <h1 className="text-3xl font-bold text-center mb-3">
+          <h1 className="text-3xl text-black font-bold text-center mb-3">
             Choose Your CV Template
           </h1>
 
@@ -161,25 +195,40 @@ export default function CVBuilderClient({
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TEMPLATES.map((tpl) => (
-              <div
-                key={tpl.id}
-                onClick={() =>
-                  setPreviewTemplate(tpl.id)
-                }
-                className="bg-white text-black rounded-2xl shadow-lg p-6 cursor-pointer hover:scale-105 transition"
-              >
-                <h2 className="text-lg font-semibold">
-                  {tpl.name}
-                </h2>
+          <div className="space-y-12">
+  {TEMPLATES.map((group) => (
+    <div key={group.category}>
+      <h2 className="text-2xl font-bold mb-6 capitalize">
+        {group.category} Templates
+      </h2>
 
-                {tpl.premium && (
-                  <span className="text-xs text-indigo-600">
-                    PRO
-                  </span>
-                )}
-              </div>
-            ))}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {group.designs.map((tpl) => (
+          <div
+            key={tpl.id}
+            onClick={() => {
+              setSelectedTemplate(tpl.id);
+              setStep("builder");
+            }}
+            className="bg-white rounded-2xl overflow-hidden shadow-lg cursor-pointer hover:scale-105 transition"
+          >
+            <img
+              src={tpl.preview}
+              alt={tpl.name}
+              className="w-full h-[420px] object-cover"
+            />
+
+            <div className="p-4">
+              <h3 className="font-semibold text-lg">
+                {tpl.name}
+              </h3>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
 
           </div>
         </div>
@@ -234,6 +283,26 @@ export default function CVBuilderClient({
                   template={previewTemplate}
                 />
               </div>
+{/* 
+<div className="overflow-auto w-full flex justify-center">
+  <div
+    style={{
+      transform:
+        typeof window !== "undefined" && window.innerWidth < 768
+          ? "scale(0.45)"
+          : "scale(1)",
+      transformOrigin: "top center",
+      width: "794px",
+      margin: "0 auto",
+    }}
+  >
+    <CVPreview
+      ref={cvRef}
+      data={data}
+      template={selectedTemplate}
+    />
+  </div>
+</div> */}
 
               <div className="flex justify-end gap-3">
                 <button
