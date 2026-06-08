@@ -19,7 +19,7 @@ const menu = [
   },
   {
     name: "Ratings",
-    href: "/admin/ratings",
+    href: "/admin/rating",
     icon: Star,
   },
   {

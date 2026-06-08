@@ -152,9 +152,11 @@
 
 
 
+import AnalyticsChart from "../components/admin/AnalyticsChart";
 import QuickActions from "../components/admin/QuickActions";
 import RecentActivity from "../components/admin/RecentActivity";
 import StatsCards from "../components/admin/StatsCards";
+import TopFeatures from "../components/admin/TopFeatures";
 
 export default function AdminDashboard() {
   return (
@@ -164,10 +166,19 @@ export default function AdminDashboard() {
       </h1>
 
       <StatsCards />
-      <div className="grid lg:grid-cols-2 gap-6 mt-6">
-        <RecentActivity />
-        <QuickActions/>
-      </div>
+      <div className="grid lg:grid-cols-3 gap-6 mt-6">
+
+  <div className="lg:col-span-2">
+    <AnalyticsChart />
+    <TopFeatures/>
+  </div>
+
+  <div className="space-y-6">
+    <RecentActivity />
+    <QuickActions />
+  </div>
+
+</div>
     </div>
   );
 }

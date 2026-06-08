@@ -1,7 +1,50 @@
+"use client";
+
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
+
 const data = [
-  { day: "Mon", ratings: 100, posts: 80 },
-  { day: "Tue", ratings: 120, posts: 95 },
-  { day: "Wed", ratings: 150, posts: 100 },
-  { day: "Thu", ratings: 180, posts: 120 },
-  { day: "Fri", ratings: 200, posts: 140 },
+  { day: "Mon", users: 20 },
+  { day: "Tue", users: 35 },
+  { day: "Wed", users: 25 },
+  { day: "Thu", users: 50 },
+  { day: "Fri", users: 40 },
+  { day: "Sat", users: 60 },
+  { day: "Sun", users: 80 },
 ];
+
+export default function AnalyticsChart() {
+  return (
+    <div className="bg-white rounded-2xl shadow p-6 h-[400px]">
+      <h2 className="text-lg font-semibold mb-4">
+        Platform Activity
+      </h2>
+
+      <ResponsiveContainer width="100%" height="90%">
+        <LineChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+
+          <XAxis dataKey="day" />
+
+          <YAxis />
+
+          <Tooltip />
+
+          <Line
+            type="monotone"
+            dataKey="users"
+            stroke="#4f46e5"
+            strokeWidth={3}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
