@@ -7,7 +7,8 @@ export default function NameGeneratorPage() {
     const [category, setCategory] = useState("Technology");
     const [results, setResults] = useState<string[]>([]);
     const [copied, setCopied] = useState("");
-const [savedNames, setSavedNames] = useState<string[]>([]);
+    const [savedNames, setSavedNames] = useState<string[]>([]);
+const [showToast, setShowToast] = useState(false);
 
     //   const generateNames = () => {
     //   const prefixes = [
@@ -37,39 +38,70 @@ const [savedNames, setSavedNames] = useState<string[]>([]);
     //   setResults(generated);
     // };
 
-    const generateNames = () => {
-        if (!keyword.trim()) return;
-
-        const categoryWords: Record<string, string[]> = {
-            Technology: ["Tech", "Labs", "AI", "Cloud", "Systems"],
-            Software: ["Code", "Apps", "Stack", "Works", "Solutions"],
-            Ecommerce: ["Store", "Market", "Shop", "Cart", "Commerce"],
-            Finance: ["Capital", "Pay", "Funds", "Invest", "Money"],
-            Healthcare: ["Health", "Care", "Med", "Clinic", "Life"],
-            Education: ["Learn", "Academy", "School", "Tutor", "Skills"],
-            Fashion: ["Style", "Wear", "Trend", "Mode", "Fashion"],
-            Restaurant: ["Kitchen", "Bites", "Food", "Taste", "Meals"],
-            "Real Estate": ["Homes", "Property", "Realty", "Estate", "Land"],
-            Marketing: ["Media", "Growth", "Reach", "Boost", "Digital"],
-        };
-
-        const words = categoryWords[category] || [];
-
-        const generated = words.map(
-            (word) => `${keyword}${word}`
-        );
-
-        setResults(generated);
-    };
-
-    const saveName = (name: string) => {
+   const generateNames = () => {
+  if (!keyword.trim()) return;
+const saveName = (name: string) => {
   if (savedNames.includes(name)) return;
 
   setSavedNames((prev) => [...prev, name]);
+
+  setShowToast(true);
+
+  setTimeout(() => {
+    setShowToast(false);
+  }, 2000);
 };
+  const prefixes = [
+    "Nova",
+    "Prime",
+    "Ultra",
+    "Smart",
+    "Next",
+  ];
+
+  const categoryWords: Record<string, string[]> = {
+    Technology: ["Tech", "Labs", "AI", "Cloud", "Systems"],
+    Software: ["Code", "Apps", "Stack", "Works", "Solutions"],
+    Ecommerce: ["Store", "Market", "Shop", "Cart", "Commerce"],
+    Finance: ["Capital", "Pay", "Funds", "Invest", "Money"],
+    Healthcare: ["Health", "Care", "Med", "Clinic", "Life"],
+    Education: ["Learn", "Academy", "School", "Tutor", "Skills"],
+    Fashion: ["Style", "Wear", "Trend", "Mode", "Fashion"],
+    Restaurant: ["Kitchen", "Bites", "Food", "Taste", "Meals"],
+    "Real Estate": ["Homes", "Property", "Realty", "Estate", "Land"],
+    Marketing: ["Media", "Growth", "Reach", "Boost", "Digital"],
+  };
+
+  const words = categoryWords[category];
+
+  const generated = Array.from({ length: 8 }, () => {
+    const prefix =
+      prefixes[Math.floor(Math.random() * prefixes.length)];
+
+    const word =
+      words[Math.floor(Math.random() * words.length)];
+
+    return Math.random() > 0.5
+      ? `${keyword}${word}`
+      : `${prefix}${keyword}${word}`;
+  });
+
+  setResults([...new Set(generated)]);
+};
+
+    const saveName = (name: string) => {
+        if (savedNames.includes(name)) return;
+
+        setSavedNames((prev) => [...prev, name]);
+    };
 
     return (
         <div className="min-h-screen bg-slate-50 py-20">
+           {showToast && (
+  <div className="fixed top-6 right-6 bg-green-600 text-white px-5 py-3 rounded-xl shadow-lg z-50">
+    ✓ Name saved successfully
+  </div>
+)}
             <div className="max-w-4xl mx-auto px-6">
 
                 {/* Header */}
@@ -196,12 +228,12 @@ const [savedNames, setSavedNames] = useState<string[]>([]);
                                         >
                                             Share
                                         </button>
-<button
-  onClick={() => saveName(name)}
-  className="border px-4 py-2 rounded-lg"
->
-  ❤️ Save
-</button>
+                                        <button
+                                            onClick={() => saveName(name)}
+                                            className="border px-4 py-2 rounded-lg"
+                                        >
+                                            ❤️ Save
+                                        </button>
                                     </div>
                                 </div>
                             ))}
@@ -210,8 +242,47 @@ const [savedNames, setSavedNames] = useState<string[]>([]);
 
                     </div>
                 )}
+ {savedNames.length > 0 && (
+                <div className="mt-10 bg-white rounded-3xl shadow p-8">
+
+                    <h2 className="text-2xl font-bold mb-6">
+                        Saved Names ({savedNames.length})
+                    </h2>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+
+                        {savedNames.map((name) => (
+                            <div
+                                key={name}
+                                className="border rounded-xl p-4 flex justify-between items-center"
+                            >
+                                <span className="font-medium">
+                                    {name}
+                                </span>
+
+                                <button
+                                    onClick={() =>
+                                        setSavedNames(
+                                            savedNames.filter(
+                                                (item) => item !== name
+                                            )
+                                        )
+                                    }
+                                    className="text-red-500"
+                                >
+                                    Remove
+                                </button>
+                            </div>
+                        ))}
+
+                    </div>
+
+                </div>
+            )}
 
             </div>
+           
+
         </div>
     );
 }
