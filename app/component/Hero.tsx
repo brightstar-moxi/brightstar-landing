@@ -218,12 +218,12 @@ export default function Hero() {
             <div className="absolute w-[300px] h-[300px] rounded-full border border-purple-500/30 top-20 left-1/2 -translate-x-1/2" />
 
             {/* Developer image */}
-            <div className="absolute inset-x-0 top-5 flex justify-center">
+            <div className="absolute inset-x-0 -top-16 flex justify-center">
 
               <div className="relative w-[370px] h-[480px]">
 
                 <Image
-                  src="/nice.jpg"
+                  src="/nice.png"
                   alt="Brightstar Tech Developer"
                   fill
                   priority

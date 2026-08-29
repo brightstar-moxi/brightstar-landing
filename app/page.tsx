@@ -4,6 +4,7 @@ import Footer from "./component/Footer";
 import Header from "./component/Header";
 import Hero from "./component/Hero";
 import PlansSection from "./component/PlansSection";
+import ServicesSection from "./component/ServicesSection";
 import Testimonials from "./component/Testimonials";
 // import Footer from "./component/Footer";
 
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="flex flex-col min-h-screen">
       <Header />
       <Hero />
+      <ServicesSection/>
       <FeaturedEbooks />
       <PlansSection/>
       <Testimonials/>
