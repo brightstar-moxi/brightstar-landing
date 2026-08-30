@@ -2,6 +2,7 @@ export const testimonials = [
   {
     id: 1,
     name: "Sis. Sarah Johnson",
+     role: "Business Owner",
     quote:
       "Brightstar Tech's ebooks are affordable and easy to understand. I learned coding basics in just a week!",
   photo: "/pic3.jpg"
@@ -9,6 +10,7 @@ export const testimonials = [
   {
     id: 2,
     name: "Bro. Michael Osei",
+    role: "Entrepreneur",
     quote:
       "Amazing resources for young people! Their digital marketing ebook gave me the confidence to start freelancing.",
   photo: "/pic6.jpg"
@@ -16,6 +18,7 @@ export const testimonials = [
   {
     id: 3,
     name: "Sis. Aisha Bello",
+     role: "Business Owner",
     quote:
       "I love how practical the lessons are. I’ve already started applying what I learned in real projects.",
    photo: "/pic5.jpg"
@@ -23,6 +26,7 @@ export const testimonials = [
      {
     id: 4,
     name: "Mr. Olusegu Micheal",
+     role: "Entrepreneur",
     quote:
       "Brightstar Tech transformed my business website completely. The design was clean, fast, and exactly what I had imagined. Their team was patient with all my revisions and delivered earlier than expected. I’ll definitely work with them again!",
    photo: "/pic1.jpg"
@@ -30,6 +34,7 @@ export const testimonials = [
      {
     id: 5,
     name: "Dr. John Collins",
+     role: "CEO, TechCorp",
     quote:
       "I hired Brightstar Tech for a full web app build, and the result was beyond impressive. Smooth backend, beautiful UI, perfect mobile responsiveness. Their communication and professionalism are unmatched. Highly recommended!",
    photo: "/pic2.jpg"
@@ -37,6 +42,7 @@ export const testimonials = [
      {
     id: 6,
     name: "Mrs. Daniel Goodness",
+     role: "Business Owner",
     quote:
       "I love working with Brightstar Tech. They helped me set up my portfolio website and automated booking system. Everything works perfectly, and I’ve already started getting more clients thanks to their work.",
    photo: "/pic4.jpg"
