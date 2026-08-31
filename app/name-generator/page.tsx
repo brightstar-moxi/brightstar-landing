@@ -40,17 +40,17 @@ const [showToast, setShowToast] = useState(false);
 
    const generateNames = () => {
   if (!keyword.trim()) return;
-const saveName = (name: string) => {
-  if (savedNames.includes(name)) return;
+// const saveName = (name: string) => {
+//   if (savedNames.includes(name)) return;
 
-  setSavedNames((prev) => [...prev, name]);
+//   setSavedNames((prev) => [...prev, name]);
 
-  setShowToast(true);
+//   setShowToast(true);
 
-  setTimeout(() => {
-    setShowToast(false);
-  }, 2000);
-};
+//   setTimeout(() => {
+//     setShowToast(false);
+//   }, 2000);
+// };
   const prefixes = [
     "Nova",
     "Prime",
@@ -89,12 +89,22 @@ const saveName = (name: string) => {
   setResults([...new Set(generated)]);
 };
 
-    const saveName = (name: string) => {
-        if (savedNames.includes(name)) return;
+    // const saveName = (name: string) => {
+    //     if (savedNames.includes(name)) return;
 
-        setSavedNames((prev) => [...prev, name]);
-    };
+    //     setSavedNames((prev) => [...prev, name]);
+    // };
+const saveName = (name: string) => {
+  if (savedNames.includes(name)) return;
 
+  setSavedNames((prev) => [...prev, name]);
+
+  setShowToast(true);
+
+  setTimeout(() => {
+    setShowToast(false);
+  }, 2000);
+};
     return (
         <div className="min-h-screen bg-slate-50 py-20">
            {showToast && (

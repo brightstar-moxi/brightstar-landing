@@ -100,6 +100,7 @@ import { useEffect, useState } from "react";
 import { Menu, X, Moon } from "lucide-react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -141,7 +142,7 @@ export default function Header() {
         {/* <div className="h-16 flex items-center justify-between"> */}
 <div className="h-[72px] flex items-center justify-between">
           {/* Logo */}
-          <a
+          <Link
             href="/"
             className="flex items-center gap-2"
           >
@@ -164,7 +165,7 @@ export default function Header() {
                 TECH
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">

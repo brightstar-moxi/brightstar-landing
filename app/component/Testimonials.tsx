@@ -294,7 +294,7 @@ export default function Testimonials() {
 
                 {/* Quote */}
                 <p className="mt-5 text-sm leading-6 text-slate-400">
-                  "{t.quote}"
+                  {t.quote}
                 </p>
 
               </div>

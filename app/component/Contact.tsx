@@ -316,7 +316,7 @@ import emailjs from "emailjs-com";
 import {
   Rocket,
   Mail,
-  Phone,
+  
   MapPin,
   Send,
   MessageCircle,
@@ -390,7 +390,7 @@ export default function Contact() {
                 </h2>
 
                 <p className="mt-1 text-sm text-blue-100 md:text-base">
-                  Let's build something amazing together.
+                  Let&apos;s build something amazing together.
                 </p>
               </div>
 
@@ -441,11 +441,11 @@ export default function Contact() {
             <div className="relative z-10">
 
               <h3 className="text-2xl font-bold">
-                Let's Work Together
+                Let&apos;s Work Together
               </h3>
 
               <p className="mt-2 max-w-sm text-sm leading-6 text-slate-400">
-                Have a project in mind? Send me a message and let's get
+                Have a project in mind? Send me a message and let&apos;s get
                 started.
               </p>
 

@@ -52,6 +52,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, Star, ArrowRight } from "lucide-react";
 import { ebooks } from "../data/ebook";
+import Image from "next/image";
 
 export default function FeaturedEbooks() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -121,7 +122,7 @@ export default function FeaturedEbooks() {
                 {/* Cover */}
                 <div className="relative h-[150px] overflow-hidden bg-[#050b18] p-2">
 
-                  <img
+                  <Image
                     src={book.image}
                     alt={book.title}
                     className="h-full w-full rounded-sm object-cover transition duration-500 group-hover:scale-[1.03]"
