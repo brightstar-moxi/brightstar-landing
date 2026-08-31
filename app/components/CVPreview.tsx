@@ -1,7 +1,8 @@
 "use client";
-
+// import React from "react";
 import { forwardRef } from "react";
 import { CVData } from "../cv-builder/types";
+
 
 const CVPreview = forwardRef<HTMLDivElement, { data: CVData }>(
   ({ data }, ref) => {
@@ -9,6 +10,8 @@ const CVPreview = forwardRef<HTMLDivElement, { data: CVData }>(
       ? data.skills.split(",").map((s) => s.trim())
       : [];
 
+
+    
     return (
       <div
         ref={ref}
@@ -69,6 +72,8 @@ const CVPreview = forwardRef<HTMLDivElement, { data: CVData }>(
     );
   }
 );
+
+  CVPreview.displayName = "CVPreview";
 
 export default CVPreview;
 
