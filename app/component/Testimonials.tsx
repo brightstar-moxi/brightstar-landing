@@ -185,6 +185,7 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { testimonials } from "../data/testimonials";
+import Image from "next/image";
 
 export default function Testimonials() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -262,7 +263,7 @@ export default function Testimonials() {
                 {/* Client */}
                 <div className="flex items-center gap-4">
 
-                  <img
+                  <Image
                     src={t.photo}
                     alt={t.name}
                     className="h-12 w-12 rounded-full border-2 border-white/10 object-cover"

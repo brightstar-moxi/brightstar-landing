@@ -10,6 +10,8 @@ import {
   Phone,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+
 
 export default function Footer() {
   return (
@@ -63,7 +65,7 @@ export default function Footer() {
             {/* Socials */}
             <div className="mt-6 flex gap-3">
 
-              <a
+              <Link
                 href="https://www.facebook.com/profile.php?id=100075277795478"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -71,9 +73,9 @@ export default function Footer() {
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-slate-400 transition hover:border-purple-500/50 hover:bg-purple-500/10 hover:text-purple-400"
               >
                 <Facebook size={16} />
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="https://x.com/BrightstarMoxiz"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -81,9 +83,9 @@ export default function Footer() {
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-slate-400 transition hover:border-purple-500/50 hover:bg-purple-500/10 hover:text-purple-400"
               >
                 <Twitter size={16} />
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -91,15 +93,15 @@ export default function Footer() {
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-slate-400 transition hover:border-purple-500/50 hover:bg-purple-500/10 hover:text-purple-400"
               >
                 <Linkedin size={16} />
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="#"
                 aria-label="Instagram"
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-slate-400 transition hover:border-purple-500/50 hover:bg-purple-500/10 hover:text-purple-400"
               >
                 <Instagram size={16} />
-              </a>
+              </Link>
 
             </div>
 
@@ -117,57 +119,57 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
 
               <li>
-                <a
+                <Link
                   href="#home"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Home
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#services"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Services
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#ebooks"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   E-books
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#pricing"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Pricing
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#testimonials"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Testimonials
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#contact"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Contact
-                </a>
+                </Link>
               </li>
 
             </ul>
@@ -185,48 +187,48 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
 
               <li>
-                <a
+                <Link
                   href="#blog"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Blog
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#learning"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Learning Hub
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#ebooks"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   E-books
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#faq"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   FAQs
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#support"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Support
-                </a>
+                </Link>
               </li>
 
             </ul>
@@ -244,39 +246,39 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
 
               <li>
-                <a
+                <Link
                   href="#privacy"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Privacy Policy
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#terms"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Terms of Service
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#refund"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Refund Policy
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="#cookies"
                   className="text-slate-400 transition hover:text-purple-400"
                 >
                   Cookie Policy
-                </a>
+                </Link>
               </li>
 
             </ul>
@@ -301,12 +303,12 @@ export default function Footer() {
                   className="mt-1 shrink-0 text-purple-400"
                 />
 
-                <a
+                <Link
                   href="mailto:brightstartech@gmail.com"
                   className="text-sm text-slate-400 transition hover:text-purple-400"
                 >
                   brightstartech@gmail.com
-                </a>
+                </Link>
 
               </div>
 
@@ -318,12 +320,12 @@ export default function Footer() {
                   className="mt-1 shrink-0 text-blue-400"
                 />
 
-                <a
+                <Link
                   href="tel:+2348012345678"
                   className="text-sm text-slate-400 transition hover:text-blue-400"
                 >
-                  +234 801 234 5678
-                </a>
+                  +234 702 502 1586
+                </Link>
 
               </div>
 
