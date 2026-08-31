@@ -278,10 +278,10 @@ export default function CVBuilderClient({
               </h2>
 
               <div className="border rounded-lg p-4 max-h-[500px] overflow-auto mb-6">
-                <CVPreview
+                {/* <CVPreview
                   data={data}
-                  template={previewTemplate}
-                />
+                  templates={previewTemplate}
+                /> */}
               </div>
 {/* 
 <div className="overflow-auto w-full flex justify-center">
