@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import FormSection from "../components/FormSection";
-import CVPreview from "../components/CVPreview";
+ import CVPreview from "../components/CVPreview";
 import { CVData } from "./types";
 
 import html2canvas from "html2canvas";

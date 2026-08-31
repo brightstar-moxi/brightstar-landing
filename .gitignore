@@ -42,5 +42,5 @@ next-env.d.ts
 
 
 # app
-/app/admin
-/app/cv-builder
+# /app/admin
+# /app/cv-builder
