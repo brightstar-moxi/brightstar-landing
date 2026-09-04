@@ -338,7 +338,7 @@ export default function Footer() {
                 />
 
                 <span className="text-sm text-slate-400">
-                  Ekiti State, Nigeria
+                 Oyo State, Nigeria
                 </span>
 
               </div>

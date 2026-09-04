@@ -266,6 +266,9 @@ export default function Testimonials() {
                   <Image
                     src={t.photo}
                     alt={t.name}
+                     width={500}
+  height={300}
+  // fill
                     className="h-12 w-12 rounded-full border-2 border-white/10 object-cover"
                   />
 

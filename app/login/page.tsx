@@ -21,16 +21,28 @@ export default function AdminLogin() {
   const router = useRouter();
 
   // ✅ Generate once (NO useEffect, NO re-renders)
-  const [orbs] = useState<Orb[]>(() =>
-    Array.from({ length: 10 }).map((_, i) => ({
-      id: i,
-      x: Math.random() * 600 - 300,
-      y: Math.random() * 600 - 300,
-      scale: Math.random() + 0.5,
-      duration: 6 + Math.random() * 5,
-      delay: Math.random() * 4,
-    }))
-  );
+  // const [orbs] = useState<Orb[]>(() =>
+  //   Array.from({ length: 10 }).map((_, i) => ({
+  //     id: i,
+  //     x: Math.random() * 600 - 300,
+  //     y: Math.random() * 600 - 300,
+  //     scale: Math.random() + 0.5,
+  //     duration: 6 + Math.random() * 5,
+  //     delay: Math.random() * 4,
+  //   }))
+  // );
+const orbs: Orb[] = [
+  { id: 1, x: -220, y: 180, scale: 0.7, duration: 7, delay: 0 },
+  { id: 2, x: 120, y: 90, scale: 1.2, duration: 8, delay: 1 },
+  { id: 3, x: -50, y: -120, scale: 0.8, duration: 6, delay: 2 },
+  { id: 4, x: 250, y: -200, scale: 1.1, duration: 9, delay: 0.5 },
+  { id: 5, x: -280, y: -220, scale: 0.9, duration: 7, delay: 1.5 },
+  { id: 6, x: 180, y: 250, scale: 1.3, duration: 8, delay: 2.5 },
+  { id: 7, x: -120, y: 280, scale: 0.8, duration: 6, delay: 3 },
+  { id: 8, x: 280, y: 100, scale: 1.0, duration: 10, delay: 1 },
+  { id: 9, x: -180, y: -50, scale: 1.4, duration: 7, delay: 2 },
+  { id: 10, x: 50, y: 200, scale: 0.6, duration: 9, delay: 3 },
+];
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

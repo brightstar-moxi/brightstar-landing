@@ -185,12 +185,12 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-3">
 
             {/* Theme Button */}
-            <button
+            {/* <button
               className="w-8 h-8 rounded-full bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/[0.08] transition"
               aria-label="Toggle theme"
             >
               <Moon size={13} />
-            </button>
+            </button> */}
 
             {/* Login */}
             <a

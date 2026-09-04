@@ -125,6 +125,9 @@ export default function FeaturedEbooks() {
                   <Image
                     src={book.image}
                     alt={book.title}
+  //                    width={500}
+  // height={300}
+  fill
                     className="h-full w-full rounded-sm object-cover transition duration-500 group-hover:scale-[1.03]"
                   />
 

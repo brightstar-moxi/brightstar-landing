@@ -15,18 +15,18 @@ export const ebooks = [
     id: 3,
     title: "Git Cheat Sheet",
     price: 1000,
-    image: "git.jpg",
+    image: "/git.jpg",
   },
   {
     id: 4,
     title: "Real Hustle",
     price: 10000,
-    image: "cover-hustler.png",
+    image: "/cover-hustler.png",
   },
   {
     id: 5,
     title: "Life after School",
     price: 5000,
-    image: "life-school.png",
+    image: "/life-school.png",
   },
 ];
