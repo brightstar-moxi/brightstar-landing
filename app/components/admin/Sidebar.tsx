@@ -10,6 +10,7 @@ import {
   Mail,
   Settings,
 } from "lucide-react";
+import LogoutButton from "@/app/admin/logout/page";
 
 const menu = [
   {
@@ -51,7 +52,19 @@ const menu = [
 
 export default function Sidebar() {
   return (
-    <aside className="w-72 bg-slate-950 text-white flex flex-col">
+    <aside  className="
+        fixed
+        top-0
+        left-0
+        z-50
+        h-screen
+        w-72
+        bg-slate-950
+        text-white
+        flex
+        flex-col
+        overflow-hidden
+      ">
 
       <div className="p-6 border-b border-slate-800">
         <h1 className="text-2xl font-bold">
@@ -77,7 +90,7 @@ export default function Sidebar() {
         ))}
 
       </nav>
-
+<LogoutButton />
       <div className="p-4 border-t border-slate-800">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-indigo-500" />
