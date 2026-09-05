@@ -13,7 +13,7 @@ export default function AdminLayout({
       <div className="flex-1 flex flex-col">
         {/* <Topbar /> */}
 
-        <main className="p-6 ml-72 min-h-screen">
+        <main className="p-6 min-h-screen md:ml-72">
           {children}
         </main>
       </div>
